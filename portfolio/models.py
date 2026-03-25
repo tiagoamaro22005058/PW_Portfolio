@@ -37,3 +37,17 @@ class UnidadeCurricular(models.Model):
 
     def __str__(self):
         return f"{self.sigla} - {self.nome}"
+
+class Projeto(models.Model):
+    uc = models.ForeignKey(UnidadeCurricular, on_delete=models.CASCADE)
+    titulo = models.CharField(max_length=200)
+    descricao = models.TextField(blank=True)
+    conceitos_aplicados = models.TextField(blank=True)
+    imagem = models.ImageField(upload_to='projetos/', blank=True, null=True)
+    url_video_demo = models.URLField(blank=True)
+    url_github = models.URLField(blank=True)
+    ano_realizacao = models.IntegerField()
+    nota = models.IntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return self.titulo
