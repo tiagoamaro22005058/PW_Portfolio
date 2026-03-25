@@ -13,6 +13,15 @@ class Licenciatura(models.Model):
     def __str__(self):
         return self.nome
 
+class Docente(models.Model):
+    nome = models.CharField(max_length=200)
+    url_perfil_lusofona = models.URLField(blank=True)
+    email = models.EmailField(blank=True)
+    foto = models.ImageField(upload_to='docentes/', blank=True, null=True)
+
+    def __str__(self):
+        return self.nome
+
 class UnidadeCurricular(models.Model):
     licenciatura = models.ForeignKey(Licenciatura, on_delete=models.CASCADE)
     nome = models.CharField(max_length=200)
@@ -24,6 +33,7 @@ class UnidadeCurricular(models.Model):
     imagem = models.ImageField(upload_to='unidades_curriculares/', blank=True, null=True)
     url_ficha = models.URLField(blank=True)
     concluida = models.BooleanField(default=False)
+    docentes = models.ManyToManyField(Docente, blank=True) #Esqueci-me de por o docente na unidadeCurricular.....
 
     def __str__(self):
         return f"{self.sigla} - {self.nome}"
