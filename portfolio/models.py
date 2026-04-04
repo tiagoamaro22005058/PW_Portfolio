@@ -103,7 +103,7 @@ class TFC(models.Model):
     curso = models.CharField(max_length=200, blank=True, null=True)
     ano = models.IntegerField()
     sumario = models.TextField(blank=True)
-    palavras_chave = models.CharField(max_length=500, blank=True)  # ex: "Python, Django, AI"
+    palavras_chave = models.CharField(max_length=500, blank=True)  # ex: "Python, Django
     areas = models.CharField(max_length=500, blank=True)
     tecnologias = models.CharField(max_length=500, blank=True)
     link_pdf = models.URLField(blank=True, null=True)
@@ -112,3 +112,43 @@ class TFC(models.Model):
 
     def __str__(self):
         return self.titulo
+
+class Formacao(models.Model):
+    TIPO_CHOICES = [
+        ('academica', 'Académica'),
+        ('curso', 'Curso Online'),
+        ('certificacao', 'Certificação'),
+        ('workshop', 'Workshop'),
+        ('outro', 'Outro'),
+    ]
+
+    titulo = models.CharField(max_length=200)
+    instituicao = models.CharField(max_length=200)
+    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES, default='curso')
+    data_inicio = models.DateField()
+    data_fim = models.DateField(blank=True, null=True)
+    certificado_url = models.URLField(blank=True)
+    descricao = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ['-data_inicio']  # ordena do mais recente para o mais antigo <-- visto no Claude
+
+    def __str__(self):
+        return f"{self.titulo} - {self.instituicao}"
+
+
+class MakingOf(models.Model):
+    entidade_relacionada = models.CharField(max_length=100)  # ex: "Licenciatura", "Projeto"
+    descricao_decisao = models.TextField(blank=True)
+    erros_correcoes = models.TextField(blank=True)
+    justificacao_modelacao = models.TextField(blank=True)
+    foto_papel = models.ImageField(upload_to='making_of/', blank=True, null=True)
+    data_registo = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-data_registo']
+        verbose_name = 'Making Of'
+        verbose_name_plural = 'Making Of'
+
+    def __str__(self):
+        return f"MakingOf - {self.entidade_relacionada} ({self.data_registo.strftime('%d/%m/%Y')})"
