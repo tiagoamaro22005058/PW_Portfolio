@@ -72,3 +72,19 @@ class Projeto(models.Model):
     def __str__(self):
         return self.titulo
 
+class TFC(models.Model):
+    titulo = models.CharField(max_length=500)
+    autores = models.CharField(max_length=200)
+    orientadores = models.CharField(max_length=200, blank=True, null=True)
+    curso = models.CharField(max_length=200, blank=True, null=True)
+    ano = models.IntegerField()
+    sumario = models.TextField(blank=True)
+    palavras_chave = models.CharField(max_length=500, blank=True)  # ex: "Python, Django, AI"
+    areas = models.CharField(max_length=500, blank=True)
+    tecnologias = models.CharField(max_length=500, blank=True)
+    link_pdf = models.URLField(blank=True, null=True)
+    imagem = models.ImageField(upload_to='tfcs/', blank=True, null=True)
+    rating = models.IntegerField(default=1)  # 1 a 5 — destaque/interesse
+
+    def __str__(self):
+        return self.titulo
