@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Licenciatura, UnidadeCurricular, Docente, Projeto, Tecnologia, TFC
+from .models import Licenciatura, UnidadeCurricular, Docente, Projeto, Tecnologia, TFC, Competencia
 
 @admin.register(Licenciatura) # em vez de por admin.site.register(Licenciatura, Licenciatura Admin) <-- Visto no Claude
 class LicenciaturaAdmin(admin.ModelAdmin):
@@ -34,3 +34,10 @@ class TFCAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'autores', 'ano', 'rating')
     list_filter = ('ano', 'rating')
     search_fields = ('titulo', 'autores', 'palavras_chave', 'areas')
+
+
+@admin.register(Competencia)
+class CompetenciaAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'tipo', 'nivel')
+    list_filter = ('tipo', 'nivel')
+    search_fields = ('nome',)

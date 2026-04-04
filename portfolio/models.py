@@ -72,6 +72,30 @@ class Projeto(models.Model):
     def __str__(self):
         return self.titulo
 
+class Competencia(models.Model):
+    TIPO_CHOICES = [
+        ('tecnica', 'Técnica'),
+        ('soft', 'Soft Skill'),
+        ('linguagem', 'Linguagem'),
+    ]
+
+    NIVEL_CHOICES = [
+        ('basico', 'Básico'),
+        ('intermedio', 'Intermédio'),
+        ('avancado', 'Avançado'),
+    ]
+
+    nome = models.CharField(max_length=200)
+    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES, default='tecnica')
+    nivel = models.CharField(max_length=20, choices=NIVEL_CHOICES, default='basico')
+    descricao = models.TextField(blank=True)
+    tecnologias = models.ManyToManyField(Tecnologia, blank=True)
+    projetos = models.ManyToManyField(Projeto, blank=True)
+
+    def __str__(self):
+        return self.nome
+
+
 class TFC(models.Model):
     titulo = models.CharField(max_length=500)
     autores = models.CharField(max_length=200)
