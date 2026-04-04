@@ -38,6 +38,25 @@ class UnidadeCurricular(models.Model):
     def __str__(self):
         return f"{self.sigla} - {self.nome}"
 
+class Tecnologia(models.Model):
+    CATEGORIA_CHOICES = [
+        ('linguagem', 'Linguagem de Programação'),
+        ('framework', 'Framework'),
+        ('base_dados', 'Base de Dados'),
+        ('ferramenta', 'Ferramenta'),
+        ('outro', 'Outro'),
+    ]
+
+    nome = models.CharField(max_length=100)
+    descricao = models.TextField(blank=True)
+    logo = models.ImageField(upload_to='tecnologias/', blank=True, null=True)
+    url_website = models.URLField(blank=True)
+    nivel_interesse = models.IntegerField(default=1)  # ex: 1 a 5
+    categoria = models.CharField(max_length=20, choices=CATEGORIA_CHOICES, default='outro')
+
+    def __str__(self):
+        return self.nome
+
 class Projeto(models.Model):
     uc = models.ForeignKey(UnidadeCurricular, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=200)
@@ -48,6 +67,8 @@ class Projeto(models.Model):
     url_github = models.URLField(blank=True)
     ano_realizacao = models.IntegerField()
     nota = models.IntegerField(blank=True, null=True)
+    tecnologias = models.ManyToManyField(Tecnologia, blank=True)
 
     def __str__(self):
         return self.titulo
+
