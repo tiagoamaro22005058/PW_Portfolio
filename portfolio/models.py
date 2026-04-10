@@ -153,28 +153,3 @@ class MakingOf(models.Model):
     def __str__(self):
         return f"MakingOf - {self.entidade_relacionada} ({self.data_registo.strftime('%d/%m/%Y')})"
 
-class Evento(models.Model):
-    TIPO_CHOICES = [
-        ('hackathon', 'Hackathon'),
-        ('conferencia', 'Conferência'),
-        ('workshop', 'Workshop'),
-        ('competicao', 'Competição'),
-        ('outro', 'Outro'),
-    ]
-
-    nome = models.CharField(max_length=200)
-    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES, default='outro')
-    descricao = models.TextField(blank=True)
-    data = models.DateField()
-    local = models.CharField(max_length=200, blank=True)
-    url = models.URLField(blank=True)
-    resultado = models.TextField(blank=True)
-    imagem = models.ImageField(upload_to='eventos/', blank=True, null=True)
-    tecnologias = models.ManyToManyField(Tecnologia, blank=True)
-    competencias = models.ManyToManyField(Competencia, blank=True)
-
-    class Meta:
-        ordering = ['-data']
-
-    def __str__(self):
-        return self.nome
