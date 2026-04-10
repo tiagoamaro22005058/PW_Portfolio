@@ -102,18 +102,6 @@ erDiagram
     datetime data_registo
   }
 
-  EVENTO {
-    int id PK
-    string nome
-    string tipo
-    string descricao
-    date data
-    string local
-    string url
-    string resultado
-    string imagem
-  }
-
   LICENCIATURA ||--o{ UNIDADE_CURRICULAR : "tem"
   UNIDADE_CURRICULAR }o--o{ DOCENTE : "lecionada por"
   UNIDADE_CURRICULAR ||--o{ PROJETO : "origina"
@@ -121,6 +109,4 @@ erDiagram
   TECNOLOGIA }o--o{ COMPETENCIA : "desenvolve"
   PROJETO }o--o{ COMPETENCIA : "demonstra"
   FORMACAO }o--o{ COMPETENCIA : "certifica"
-  EVENTO }o--o{ TECNOLOGIA : "envolve"
-  EVENTO }o--o{ COMPETENCIA : "desenvolve"
 ```
