@@ -1,0 +1,24 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2 class="page-title">Formações</h2>
+
+<section class="cards-grid">
+    {% for formacao in formacoes %}
+    <article>
+        <header>
+            <h3>{{ formacao.titulo }}</h3>
+            <p>{{ formacao.instituicao }} &middot; {{ formacao.get_tipo_display }}</p>
+            <p>{{ formacao.data_inicio }}{% if formacao.data_fim %} — {{ formacao.data_fim }}{% endif %}</p>
+        </header>
+
+        {% if formacao.descricao %}
+        <section>
+            <h4>Descrição</h4>
+            <p class="desc">{{ formacao.descricao }}</p>
+        </section>
+        {% endif %}
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

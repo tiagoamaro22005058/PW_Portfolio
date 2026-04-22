@@ -1,0 +1,30 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2 class="page-title">Licenciaturas</h2>
+
+<section class="cards-grid">
+    {% for lic in licenciaturas %}
+    <article>
+        {% if lic.imagem %}
+        <img class="card-img" src="{{ lic.imagem.url }}" alt="{{ lic.nome }}">
+        {% endif %}
+        <header>
+            <h3><a href="{% url 'licenciatura' lic.id %}">{{ lic.nome }}</a></h3>
+            <p>{{ lic.sigla }} &middot; {{ lic.grau }} &middot; {{ lic.duracao_anos }} anos</p>
+        </header>
+
+        <section>
+            <h4>Unidades Curriculares</h4>
+            <ul>
+                {% for uc in lic.unidadecurricular_set.all %}
+                    <li>{{ uc.sigla }}</li>
+                {% empty %}
+                    <li>Sem UCs registadas</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2 class="page-title">Competências</h2>
+
+{% regroup competencias by get_tipo_display as grupos %}
+
+{% for grupo in grupos %}
+<h3 class="group-title">{{ grupo.grouper }}</h3>
+
+<section class="cards-grid">
+    {% for comp in grupo.list %}
+    <article>
+        <header>
+            <h3>{{ comp.nome }}</h3>
+            <p>Nível: <strong>{{ comp.get_nivel_display }}</strong></p>
+        </header>
+
+        <section>
+            <h4>Tecnologias</h4>
+            <ul>
+                {% for tec in comp.tecnologias.all %}
+                    <li>{{ tec.nome }}</li>
+                {% empty %}
+                    <li>Sem tecnologias associadas</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </article>
+    {% endfor %}
+</section>
+{% endfor %}
+{% endblock %}

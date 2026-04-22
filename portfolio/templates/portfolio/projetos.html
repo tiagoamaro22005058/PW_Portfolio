@@ -1,0 +1,41 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2 class="page-title">Projetos</h2>
+
+<section class="cards-grid">
+    {% for projeto in projetos %}
+    <article>
+        {% if projeto.imagem %}
+        <img class="card-img" src="{{ projeto.imagem.url }}" alt="{{ projeto.titulo }}">
+        {% endif %}
+        <header>
+            <h3>{{ projeto.titulo }}</h3>
+            <p>{{ projeto.uc.sigla }} &middot; {{ projeto.ano_realizacao }}{% if projeto.nota %} &middot; <strong>Nota: {{ projeto.nota }}{% endif %}</strong></p>
+        </header>
+
+        <section>
+            <h4>Tecnologias</h4>
+            <ul>
+                {% for tec in projeto.tecnologias.all %}
+                    <li>{{ tec.nome }}</li>
+                {% empty %}
+                    <li>Sem tecnologias registadas</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        {% if projeto.url_github or projeto.url_video_demo %}
+        <div class="card-links">
+            {% if projeto.url_github %}
+            <a href="{{ projeto.url_github }}" target="_blank" rel="noopener" class="card-link">GitHub</a>
+            {% endif %}
+            {% if projeto.url_video_demo %}
+            <a href="{{ projeto.url_video_demo }}" target="_blank" rel="noopener" class="card-link card-link--demo">Demo</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

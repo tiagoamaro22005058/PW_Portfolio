@@ -1,0 +1,26 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2 class="page-title">Tecnologias</h2>
+
+<section class="cards-grid">
+    {% for tec in tecnologias %}
+    <article>
+        {% if tec.logo %}
+        <img class="card-img card-img--logo" src="{{ tec.logo.url }}" alt="{{ tec.nome }}">
+        {% endif %}
+        <header>
+            <h3>{{ tec.nome }}</h3>
+            <p>{{ tec.get_categoria_display }} &middot; Interesse <strong>{{ tec.nivel_interesse }}/5</strong></p>
+        </header>
+
+        {% if tec.descricao %}
+        <section>
+            <h4>Descrição</h4>
+            <p class="desc">{{ tec.descricao }}</p>
+        </section>
+        {% endif %}
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

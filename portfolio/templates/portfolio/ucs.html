@@ -1,0 +1,30 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2 class="page-title">Unidades Curriculares</h2>
+
+<section class="cards-grid">
+    {% for uc in ucs %}
+    <article>
+        {% if uc.imagem %}
+        <img class="card-img" src="{{ uc.imagem.url }}" alt="{{ uc.nome }}">
+        {% endif %}
+        <header>
+            <h3>{{ uc.nome }}</h3>
+            <p>{{ uc.sigla }} &middot; {{ uc.licenciatura.sigla }} &middot; {{ uc.ano }}º ano, {{ uc.semestre }}º sem &middot; {{ uc.ects }} ECTS</p>
+        </header>
+
+        <section>
+            <h4>Docentes</h4>
+            <ul>
+                {% for docente in uc.docentes.all %}
+                    <li>{{ docente.nome }}</li>
+                {% empty %}
+                    <li>Sem docentes registados</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

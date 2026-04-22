@@ -1,0 +1,24 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<article class="detail">
+    <header>
+        <h2>{{ licenciatura.nome }}</h2>
+        <p>{{ licenciatura.sigla }} &middot; {{ licenciatura.grau }} &middot; {{ licenciatura.duracao_anos }} anos</p>
+        {% if licenciatura.descricao %}
+            <p>{{ licenciatura.descricao }}</p>
+        {% endif %}
+    </header>
+
+    <section>
+        <h4>Unidades Curriculares</h4>
+        <ul>
+            {% for uc in licenciatura.unidadecurricular_set.all %}
+                <li>{{ uc.sigla }} — {{ uc.nome }}</li>
+            {% empty %}
+                <li>Sem UCs registadas</li>
+            {% endfor %}
+        </ul>
+    </section>
+</article>
+{% endblock %}

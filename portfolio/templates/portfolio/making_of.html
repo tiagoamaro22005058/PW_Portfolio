@@ -1,0 +1,33 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2 class="page-title">Making Of</h2>
+
+<section class="cards-grid">
+    {% for registo in registos %}
+    <article>
+        {% if registo.foto_papel %}
+        <img class="card-img" src="{{ registo.foto_papel.url }}" alt="Making of - {{ registo.entidade_relacionada }}">
+        {% endif %}
+        <header>
+            <h3>{{ registo.entidade_relacionada }}</h3>
+            <p>{{ registo.data_registo|date:"d/m/Y" }}</p>
+        </header>
+
+        {% if registo.descricao_decisao %}
+        <section>
+            <h4>Decisão</h4>
+            <p class="desc">{{ registo.descricao_decisao }}</p>
+        </section>
+        {% endif %}
+
+        {% if registo.erros_correcoes %}
+        <section>
+            <h4>Erros / Correções</h4>
+            <p class="desc">{{ registo.erros_correcoes }}</p>
+        </section>
+        {% endif %}
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}
