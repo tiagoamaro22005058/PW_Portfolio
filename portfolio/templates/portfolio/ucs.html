@@ -10,7 +10,7 @@
         <img class="card-img" src="{{ uc.imagem.url }}" alt="{{ uc.nome }}">
         {% endif %}
         <header>
-            <h3>{{ uc.nome }}</h3>
+            <h3><a href="{% url 'uc' uc.id %}">{{ uc.nome }}</a></h3>
             <p>{{ uc.sigla }} &middot; {{ uc.licenciatura.sigla }} &middot; {{ uc.ano }}º ano, {{ uc.semestre }}º sem &middot; {{ uc.ects }} ECTS</p>
         </header>
 

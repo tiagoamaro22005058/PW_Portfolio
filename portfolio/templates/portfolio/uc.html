@@ -1,0 +1,53 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<article class="detail">
+    <header>
+        <h2>{{ uc.nome }}</h2>
+        <p>{{ uc.sigla }} &middot; {{ uc.licenciatura.sigla }} &middot; {{ uc.ano }}º ano, {{ uc.semestre }}º semestre &middot; {{ uc.ects }} ECTS</p>
+        {% if uc.concluida %}
+            <p><strong>Concluída</strong></p>
+        {% else %}
+            <p>Em curso</p>
+        {% endif %}
+        {% if uc.descricao %}
+            <p>{{ uc.descricao }}</p>
+        {% endif %}
+    </header>
+
+    <section>
+        <h4>Docentes</h4>
+        <ul>
+            {% for docente in uc.docentes.all %}
+                <li>
+                    {% if docente.url_perfil_lusofona %}
+                        <a href="{{ docente.url_perfil_lusofona }}" target="_blank">{{ docente.nome }}</a>
+                    {% else %}
+                        {{ docente.nome }}
+                    {% endif %}
+                </li>
+            {% empty %}
+                <li>Sem docentes registados</li>
+            {% endfor %}
+            {% if uc.url_ficha %}
+                <li><a href="{{ uc.url_ficha }}" target="_blank">Ficha da UC</a></li>
+            {% endif %}
+        </ul>
+    </section>
+
+    <section>
+        <h4>Projetos</h4>
+        <ul>
+            {% for projeto in uc.projeto_set.all %}
+                <li>
+                    <strong>{{ projeto.titulo }}</strong>
+                    {% if projeto.descricao %} — {{ projeto.descricao }}{% endif %}
+                    {% if projeto.nota %} ({{ projeto.nota }} valores){% endif %}
+                </li>
+            {% empty %}
+                <li>Sem projetos registados</li>
+            {% endfor %}
+        </ul>
+    </section>
+</article>
+{% endblock %}

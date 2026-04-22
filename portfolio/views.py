@@ -24,6 +24,11 @@ def ucs_view(request):
     return render(request, 'portfolio/ucs.html', {'ucs': ucs})
 
 
+def uc_view(request, id):
+    uc = UnidadeCurricular.objects.select_related('licenciatura').prefetch_related('docentes', 'projeto_set__tecnologias').get(id=id)
+    return render(request, 'portfolio/uc.html', {'uc': uc})
+
+
 def tecnologias_view(request):
     tecnologias = Tecnologia.objects.all()
     return render(request, 'portfolio/tecnologias.html', {'tecnologias': tecnologias})

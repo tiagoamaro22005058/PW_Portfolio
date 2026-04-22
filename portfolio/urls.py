@@ -6,6 +6,7 @@ urlpatterns = [
     path('licenciaturas/', views.licenciaturas_view, name='licenciaturas'),
     path('licenciatura/<int:id>', views.licenciatura_view, name='licenciatura'),
     path('unidades_curriculares/', views.ucs_view, name='ucs'),
+    path('unidade_curricular/<int:id>', views.uc_view, name='uc'),
     path('tecnologias/', views.tecnologias_view, name='tecnologias'),
     path('projetos/', views.projetos_view, name='projetos'),
     path('competencias/', views.competencias_view, name='competencias'),

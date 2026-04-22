@@ -449,6 +449,10 @@ article.detail > header p {
     margin-bottom: 4px;
 }
 
+article.detail a:visited {
+    color: inherit;
+}
+
 /* ── FOOTER ──────────────────────────────────────────── */
 
 footer {
