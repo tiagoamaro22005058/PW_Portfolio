@@ -10,7 +10,7 @@ def home_view(request):
 
 
 def licenciaturas_view(request):
-    licenciaturas = Licenciatura.objects.prefetch_related('unidadecurricular_set').all()
+    licenciaturas = Licenciatura.objects.prefetch_related('unidadecurricular_set').all()  # Busca todas as licenciaturas com as suas UCs pré-carregadas
     return render(request, 'portfolio/licenciaturas.html', {'licenciaturas': licenciaturas})
 
 
@@ -20,12 +20,12 @@ def licenciatura_view(request, id):
 
 
 def ucs_view(request):
-    ucs = UnidadeCurricular.objects.select_related('licenciatura').prefetch_related('docentes').all()
+    ucs = UnidadeCurricular.objects.select_related('licenciatura').prefetch_related('docentes').all() # Busca todas as UCs com a licenciatura (select_related) e docentes (prefetch_related) pré-carregados
     return render(request, 'portfolio/ucs.html', {'ucs': ucs})
 
 
 def uc_view(request, id):
-    uc = UnidadeCurricular.objects.select_related('licenciatura').prefetch_related('docentes', 'projeto_set__tecnologias').get(id=id)
+    uc = UnidadeCurricular.objects.select_related('licenciatura').prefetch_related('docentes', 'projeto_set').get(id=id)
     return render(request, 'portfolio/uc.html', {'uc': uc})
 
 

@@ -381,6 +381,8 @@ article > section > p.desc {
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .hero-image-bg {

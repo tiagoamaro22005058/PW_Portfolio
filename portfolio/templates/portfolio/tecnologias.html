@@ -10,7 +10,7 @@
         <img class="card-img card-img--logo" src="{{ tec.logo.url }}" alt="{{ tec.nome }}">
         {% endif %}
         <header>
-            <h3>{{ tec.nome }}</h3>
+            <h3><a href="{{ tec.url_website }}" target ="_blank">{{ tec.nome }}</a></h3>
             <p>{{ tec.get_categoria_display }} &middot; Interesse <strong>{{ tec.nivel_interesse }}/5</strong></p>
         </header>
 
