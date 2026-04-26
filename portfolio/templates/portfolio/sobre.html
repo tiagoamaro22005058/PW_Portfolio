@@ -1,0 +1,151 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2 class="page-title">Sobre esta Aplicação</h2>
+
+<!-- ── 1. Arquitetura MVT ─────────────────────────────── -->
+<section class="sobre-section">
+    <h2 class="sobre-title">1. Arquitetura Django MVT</h2>
+    <div class="sobre-body">
+        <p>
+            Esta aplicação segue o padrão <strong>MVT (Model – View – Template)</strong> do Django.
+            O <strong>Model</strong> define a estrutura dos dados e comunica com a base de dados via ORM.
+            A <strong>View</strong> recebe o pedido HTTP, consulta os modelos necessários e decide qual template renderizar.
+            O <strong>Template</strong> recebe o contexto da view e produz o HTML final enviado ao browser.
+        </p>
+        <div class="mvt-diagram">
+            <img src="/media/sobre/mvt_diagram_django.svg" alt="Diagrama MVT Django" class="mvt-img">
+        </div>
+        <p class="sobre-note">
+            Fluxo: o browser envia um pedido → o URL dispatcher chama a view correta →
+            a view consulta o(s) modelo(s) → passa os dados ao template → o template gera o HTML → resposta ao browser.
+        </p>
+    </div>
+</section>
+
+<!-- ── 2. Modelação de Dados ──────────────────────────── -->
+<section class="sobre-section">
+    <h2 class="sobre-title">2. Modelação de Dados</h2>
+    <div class="sobre-body">
+        <div class="cards-grid cards-grid--3">
+            {% for modelo in modelos %}
+            <article>
+                <div class="modelo-header">
+                    <span class="modelo-icon">{{ modelo.icone }}</span>
+                </div>
+                <header>
+                    <h3>{{ modelo.nome }}</h3>
+                    {% if modelo.relacoes %}<p>{{ modelo.relacoes }}</p>{% endif %}
+                </header>
+                <section>
+                    <h4>Campos</h4>
+                    <ul>
+                        {% for campo in modelo.campos %}
+                        <li>{{ campo }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ── 3. Tecnologias Utilizadas ──────────────────────── -->
+<section class="sobre-section">
+    <h2 class="sobre-title">3. Tecnologias Utilizadas</h2>
+    <div class="sobre-body">
+        {% if tecnologias %}
+        <div class="cards-grid cards-grid--3">
+            {% for tec in tecnologias %}
+            <article>
+                {% if tec.logo %}
+                <img class="card-img card-img--logo" src="{{ tec.logo.url }}" alt="{{ tec.nome }}">
+                {% else %}
+                <div class="tec-placeholder">{{ tec.nome|first }}</div>
+                {% endif %}
+                <header>
+                    <h3>{% if tec.url_website %}<a href="{{ tec.url_website }}" target="_blank" rel="noopener">{{ tec.nome }}</a>{% else %}{{ tec.nome }}{% endif %}</h3>
+                    <p>{{ tec.get_categoria_display }} &middot; Interesse {{ tec.nivel_interesse }}/5</p>
+                </header>
+                {% if tec.descricao %}
+                <section>
+                    <h4>Descrição</h4>
+                    <p class="desc">{{ tec.descricao }}</p>
+                </section>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="sobre-note">Sem tecnologias registadas. <a href="{% url 'tecnologia_criar' %}">Adicionar tecnologia</a>.</p>
+        {% endif %}
+    </div>
+</section>
+
+<!-- ── 4. Estrutura de Navegação ──────────────────────── -->
+<section class="sobre-section">
+    <h2 class="sobre-title">4. Estrutura de Navegação</h2>
+    <div class="sobre-body">
+        <img src="/media/sobre/nav_estrutura.png" alt="Estrutura de Navegação" class="mvt-img">
+    </div>
+</section>
+
+<!-- ── 5. Repositório GitHub ──────────────────────────── -->
+<section class="sobre-section">
+    <h2 class="sobre-title">5. Repositório GitHub</h2>
+    <div class="sobre-body">
+        <p>
+            O código fonte desta aplicação está disponível publicamente no GitHub.
+            O controlo de versões com Git permitiu registar a evolução do projeto commit a commit,
+            facilitando a identificação de erros, o retorno a versões anteriores e a documentação do progresso.
+        </p>
+        <a href="https://github.com/tiagoamaro22005058/PW_Portfolio" target="_blank" rel="noopener" class="github-btn">
+            Ver repositório no GitHub
+        </a>
+    </div>
+</section>
+
+<!-- ── 6. Making Of ───────────────────────────────────── -->
+<section class="sobre-section">
+    <h2 class="sobre-title">6. Making Of</h2>
+    <div class="sobre-body">
+        {% if registos %}
+        <div class="cards-grid">
+            {% for registo in registos %}
+            <article>
+                {% if registo.foto_papel %}
+                <img class="card-img" src="{{ registo.foto_papel.url }}" alt="Making of - {{ registo.entidade_relacionada }}">
+                {% endif %}
+                <header>
+                    <h3>{{ registo.entidade_relacionada }}</h3>
+                    <p>{{ registo.data_registo|date:"d/m/Y" }}</p>
+                </header>
+                {% if registo.descricao_decisao %}
+                <section>
+                    <h4>Decisões</h4>
+                    <p class="desc">{{ registo.descricao_decisao }}</p>
+                </section>
+                {% endif %}
+                {% if registo.erros_correcoes %}
+                <section>
+                    <h4>Erros e Correções</h4>
+                    <p class="desc">{{ registo.erros_correcoes }}</p>
+                </section>
+                {% endif %}
+                {% if registo.justificacao_modelacao %}
+                <section>
+                    <h4>Justificação</h4>
+                    <p class="desc">{{ registo.justificacao_modelacao }}</p>
+                </section>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="sobre-note">Sem registos de making of ainda. <a href="{% url 'making_of' %}">Ver página Making Of</a>.</p>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

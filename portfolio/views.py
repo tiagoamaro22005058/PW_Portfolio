@@ -54,6 +54,28 @@ def making_of_view(request):
     registos = MakingOf.objects.all()
     return render(request, 'portfolio/making_of.html', {'registos': registos})
 
+
+def sobre_view(request):
+    tecnologias = Tecnologia.objects.filter(
+        nome__in=['Django', 'HTML', 'CSS', 'Git', 'GitHub']
+    ).order_by('categoria', 'nome')
+    registos = MakingOf.objects.all()
+    modelos = [
+        {'icone': '🎓', 'nome': 'Licenciatura',        'relacoes': None,                           'campos': ['nome, sigla, grau', 'duração, descrição', 'imagem, URLs']},
+        {'icone': '📚', 'nome': 'UnidadeCurricular',   'relacoes': '→ Licenciatura (FK) · → Docente (M2M)', 'campos': ['nome, sigla', 'ano, semestre, ECTS']},
+        {'icone': '👤', 'nome': 'Docente',             'relacoes': None,                           'campos': ['nome, email', 'foto, URL perfil']},
+        {'icone': '🗂️', 'nome': 'Projeto',             'relacoes': '→ UC (FK) · → Tecnologia (M2M)', 'campos': ['título, descrição, nota', 'ano, GitHub, demo, imagem']},
+        {'icone': '⚙️', 'nome': 'Tecnologia',          'relacoes': None,                           'campos': ['nome, categoria', 'descrição, logo', 'nível de interesse']},
+        {'icone': '🧠', 'nome': 'Competência',         'relacoes': '→ Tecnologia (M2M) · → Projeto (M2M)', 'campos': ['nome, tipo, nível', 'descrição']},
+        {'icone': '📜', 'nome': 'Formação',            'relacoes': None,                           'campos': ['título, instituição, tipo', 'datas, certificado URL']},
+        {'icone': '📝', 'nome': 'MakingOf',            'relacoes': None,                           'campos': ['entidade relacionada', 'decisões, erros', 'justificações, foto']},
+    ]
+    return render(request, 'portfolio/sobre.html', {
+        'tecnologias': tecnologias,
+        'registos': registos,
+        'modelos': modelos,
+    })
+
 # ── Projeto CRUD ──────────────────────────────────────
 
 def projeto_create_view(request):
