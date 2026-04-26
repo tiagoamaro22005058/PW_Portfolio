@@ -1,0 +1,24 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h2 class="page-title">Apagar Tecnologia</h2>
+</div>
+
+<article class="form-card form-card--danger">
+    <header>
+        <h3>{{ tecnologia.nome }}</h3>
+        <p>{{ tecnologia.get_categoria_display }} &middot; Interesse {{ tecnologia.nivel_interesse }}/5</p>
+    </header>
+    <section>
+        <p class="desc">Esta ação é irreversível. Tens a certeza que queres apagar esta tecnologia?</p>
+    </section>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Apagar</button>
+            <a href="{% url 'tecnologias' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</article>
+{% endblock %}

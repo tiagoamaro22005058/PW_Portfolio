@@ -1,0 +1,24 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h2 class="page-title">Apagar Competência</h2>
+</div>
+
+<article class="form-card form-card--danger">
+    <header>
+        <h3>{{ competencia.nome }}</h3>
+        <p>{{ competencia.get_tipo_display }} &middot; {{ competencia.get_nivel_display }}</p>
+    </header>
+    <section>
+        <p class="desc">Esta ação é irreversível. Tens a certeza que queres apagar esta competência?</p>
+    </section>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Apagar</button>
+            <a href="{% url 'competencias' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</article>
+{% endblock %}

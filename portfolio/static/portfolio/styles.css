@@ -294,6 +294,17 @@ article > section > ul > li {
     box-shadow: 0 2px 10px rgba(139,94,60,0.35);
 }
 
+.card-link--danger {
+    color: #a93226;
+    border-color: #a93226;
+}
+
+.card-link--danger:hover {
+    background: #a93226;
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(169,50,38,0.25);
+}
+
 /* texto de descrição livre */
 article > section > p.desc {
     font-size: 13px;
@@ -483,4 +494,167 @@ footer {
 .escola-link:hover {
     color: #b8977a;
     border-color: #7a5840;
+}
+
+/* ── CRUD BUTTONS ────────────────────────────────────── */
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px 18px;
+    border-radius: 999px;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+
+.btn-primary:hover {
+    background: var(--accent-mid);
+    border-color: var(--accent-mid);
+    box-shadow: 0 2px 10px rgba(139,94,60,0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.btn-secondary:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+.btn-danger {
+    background: transparent;
+    color: #c0392b;
+    border-color: #c0392b;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+    color: #fff;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.page-header .page-title {
+    margin-bottom: 0;
+}
+
+.card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+}
+
+/* ── FORM CARD ───────────────────────────────────────── */
+article.form-card {
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+article.form-card > header {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+}
+
+article.form-card > header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 5px;
+}
+
+article.form-card > section {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 20px;
+}
+
+article.form-card--danger {
+    border-color: rgba(192,57,43,0.35);
+}
+
+article.form-card--danger::before {
+    background: linear-gradient(to bottom, #c0392b, transparent);
+    opacity: 1;
+}
+
+.form-field {
+    margin-bottom: 18px;
+}
+
+.form-field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    margin-bottom: 6px;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 13px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    background: var(--bg);
+    color: var(--text);
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(139,94,60,0.1);
+}
+
+.form-field select[multiple] {
+    height: auto;
+    min-height: 100px;
+}
+
+.form-error {
+    font-size: 12px;
+    color: #c0392b;
+    margin-top: 5px;
+}
+
+.form-help {
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 4px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
 }

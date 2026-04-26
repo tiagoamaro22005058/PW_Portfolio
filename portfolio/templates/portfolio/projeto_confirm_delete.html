@@ -1,0 +1,24 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h2 class="page-title">Apagar Projeto</h2>
+</div>
+
+<article class="form-card form-card--danger">
+    <header>
+        <h3>{{ projeto.titulo }}</h3>
+        <p>{{ projeto.uc.sigla }} &middot; {{ projeto.ano_realizacao }}{% if projeto.nota %} &middot; Nota: {{ projeto.nota }}{% endif %}</p>
+    </header>
+    <section>
+        <p class="desc">Esta ação é irreversível. Tens a certeza que queres apagar este projeto?</p>
+    </section>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Apagar</button>
+            <a href="{% url 'projetos' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</article>
+{% endblock %}

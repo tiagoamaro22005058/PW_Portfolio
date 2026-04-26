@@ -1,7 +1,10 @@
 {% extends 'portfolio/base.html' %}
 
 {% block content %}
-<h2 class="page-title">Tecnologias</h2>
+<div class="page-header">
+    <h2 class="page-title">Tecnologias</h2>
+    <a href="{% url 'tecnologia_criar' %}" class="btn btn-primary">+ Nova Tecnologia</a>
+</div>
 
 <section class="cards-grid">
     {% for tec in tecnologias %}
@@ -20,6 +23,11 @@
             <p class="desc">{{ tec.descricao }}</p>
         </section>
         {% endif %}
+
+        <div class="card-actions">
+            <a href="{% url 'tecnologia_editar' tec.id %}" class="card-link">Editar</a>
+            <a href="{% url 'tecnologia_apagar' tec.id %}" class="card-link card-link--danger">Apagar</a>
+        </div>
     </article>
     {% endfor %}
 </section>

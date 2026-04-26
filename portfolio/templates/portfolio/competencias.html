@@ -1,7 +1,10 @@
 {% extends 'portfolio/base.html' %}
 
 {% block content %}
-<h2 class="page-title">Competências</h2>
+<div class="page-header">
+    <h2 class="page-title">Competências</h2>
+    <a href="{% url 'competencia_criar' %}" class="btn btn-primary">+ Nova Competência</a>
+</div>
 
 {% regroup competencias by get_tipo_display as grupos %}
 
@@ -26,6 +29,11 @@
                 {% endfor %}
             </ul>
         </section>
+
+        <div class="card-actions">
+            <a href="{% url 'competencia_editar' comp.id %}" class="card-link">Editar</a>
+            <a href="{% url 'competencia_apagar' comp.id %}" class="card-link card-link--danger">Apagar</a>
+        </div>
     </article>
     {% endfor %}
 </section>

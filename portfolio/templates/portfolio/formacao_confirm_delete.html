@@ -1,0 +1,24 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h2 class="page-title">Apagar Formação</h2>
+</div>
+
+<article class="form-card form-card--danger">
+    <header>
+        <h3>{{ formacao.titulo }}</h3>
+        <p>{{ formacao.instituicao }} &middot; {{ formacao.get_tipo_display }}</p>
+    </header>
+    <section>
+        <p class="desc">Esta ação é irreversível. Tens a certeza que queres apagar esta formação?</p>
+    </section>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Apagar</button>
+            <a href="{% url 'formacoes' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</article>
+{% endblock %}

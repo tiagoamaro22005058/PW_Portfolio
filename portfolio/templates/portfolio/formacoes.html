@@ -1,7 +1,10 @@
 {% extends 'portfolio/base.html' %}
 
 {% block content %}
-<h2 class="page-title">Formações</h2>
+<div class="page-header">
+    <h2 class="page-title">Formações</h2>
+    <a href="{% url 'formacao_criar' %}" class="btn btn-primary">+ Nova Formação</a>
+</div>
 
 <section class="cards-grid">
     {% for formacao in formacoes %}
@@ -18,6 +21,11 @@
             <p class="desc">{{ formacao.descricao }}</p>
         </section>
         {% endif %}
+
+        <div class="card-actions">
+            <a href="{% url 'formacao_editar' formacao.id %}" class="card-link">Editar</a>
+            <a href="{% url 'formacao_apagar' formacao.id %}" class="card-link card-link--danger">Apagar</a>
+        </div>
     </article>
     {% endfor %}
 </section>
