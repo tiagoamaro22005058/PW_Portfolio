@@ -1,0 +1,41 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<div style="max-width:480px; margin:60px auto;">
+    <article class="form-card">
+        <header>
+            <h3>Criar conta</h3>
+            <p>Preenche os dados para te registares.</p>
+        </header>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="form-field">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <p class="form-error">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    {% if field.help_text %}
+                        <p class="form-help">{{ field.help_text }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="form-actions" style="border-top:none; padding-top:0; margin-top:8px;">
+                <button type="submit" class="btn btn-primary" style="width:100%; text-align:center;">Criar conta</button>
+            </div>
+        </form>
+
+        <div style="margin-top:20px; padding-top:18px; border-top:1px solid var(--border); text-align:center;">
+            <span style="font-size:13px; color:var(--text-faint);">
+                Já tens conta? <a href="{% url 'login_view' %}" style="color:var(--accent); text-decoration:none; font-weight:500;">Faz login aqui</a>
+            </span>
+        </div>
+    </article>
+</div>
+{% endblock %}

@@ -3,7 +3,9 @@
 {% block content %}
 <div class="page-header">
     <h2 class="page-title">Competências</h2>
+    {% if is_gestor %}
     <a href="{% url 'competencia_criar' %}" class="btn btn-primary">+ Nova Competência</a>
+    {% endif %}
 </div>
 
 {% regroup competencias by get_tipo_display as grupos %}
@@ -31,8 +33,10 @@
         </section>
 
         <div class="card-actions">
+            {% if is_gestor %}
             <a href="{% url 'competencia_editar' comp.id %}" class="card-link">Editar</a>
             <a href="{% url 'competencia_apagar' comp.id %}" class="card-link card-link--danger">Apagar</a>
+            {% endif %}
         </div>
     </article>
     {% endfor %}

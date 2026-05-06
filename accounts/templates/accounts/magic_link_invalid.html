@@ -1,0 +1,7 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<h2>Link inválido ou expirado</h2>
+<p>Este link já foi utilizado ou expirou (validade de 15 minutos).</p>
+<p><a href="{% url 'magic_link_request' %}">Pedir um novo link</a></p>
+{% endblock %}

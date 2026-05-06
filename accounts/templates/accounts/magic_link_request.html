@@ -1,0 +1,37 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<div style="max-width:440px; margin:60px auto;">
+    <article class="form-card">
+        <header>
+            <h3>Link mágico</h3>
+            <p>Introduz o teu email e recebes um link para entrares sem password.</p>
+        </header>
+
+        {% if mensagem %}
+            <div style="background:var(--accent-soft); border:1px solid rgba(139,94,60,0.2); border-radius:8px; padding:14px 16px; margin-bottom:4px;">
+                <p style="font-size:13px; color:var(--accent); margin:0;">{{ mensagem }}</p>
+            </div>
+        {% else %}
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-field">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required autofocus>
+                </div>
+
+                <div class="form-actions" style="border-top:none; padding-top:0; margin-top:8px;">
+                    <button type="submit" class="btn btn-primary" style="width:100%; text-align:center;">Enviar link</button>
+                </div>
+            </form>
+        {% endif %}
+
+        <div style="margin-top:20px; padding-top:18px; border-top:1px solid var(--border); text-align:center;">
+            <a href="{% url 'login_view' %}" style="font-size:13px; color:var(--accent); text-decoration:none; font-weight:500;">
+                Voltar ao login normal
+            </a>
+        </div>
+    </article>
+</div>
+{% endblock %}

@@ -3,7 +3,9 @@
 {% block content %}
 <div class="page-header">
     <h2 class="page-title">Tecnologias</h2>
-    <a href="{% url 'tecnologia_criar' %}" class="btn btn-primary">+ Nova Tecnologia</a>
+    {% if is_gestor %}
+        <a href="{% url 'tecnologia_criar' %}" class="btn btn-primary">+ Nova Tecnologia</a>
+    {% endif %}    
 </div>
 
 <section class="cards-grid">
@@ -25,8 +27,10 @@
         {% endif %}
 
         <div class="card-actions">
+            {% if is_gestor %}
             <a href="{% url 'tecnologia_editar' tec.id %}" class="card-link">Editar</a>
             <a href="{% url 'tecnologia_apagar' tec.id %}" class="card-link card-link--danger">Apagar</a>
+            {% endif %}
         </div>
     </article>
     {% endfor %}

@@ -22,6 +22,17 @@
             <a href="{% url 'making_of' %}">Making Of</a>
             <a href="{% url 'sobre' %}">Sobre</a>
         </nav>
+        <div style="display:flex; align-items:center; gap:10px; margin-left:auto;">
+            {% if request.user.is_authenticated %}
+                <span style="color:#b8977a; font-size:13px; font-weight:500;">{{ request.user.username }}</span>
+                <form method="post" action="{% url 'logout_view' %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="background:transparent; border:1.5px solid #b8977a; color:#b8977a; font-size:13px; font-weight:600; padding:5px 14px; border-radius:999px; cursor:pointer; transition:background 0.15s, color 0.15s;">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login_view' %}" style="color:#b8977a; border:1.5px solid #b8977a; font-size:13px; font-weight:600; padding:5px 14px; border-radius:999px; text-decoration:none; transition:background 0.15s, color 0.15s;">Login</a>
+            {% endif %}
+        </div>
     </header>
 
     <main>

@@ -4,6 +4,7 @@ from .models import (
     Projeto, Competencia, Formacao, MakingOf
 )
 from .forms import ProjetoForm, TecnologiaForm, CompetenciaForm, FormacaoForm
+from django.contrib.auth.decorators import login_required
 
 
 def home_view(request):
@@ -77,7 +78,7 @@ def sobre_view(request):
     })
 
 # ── Projeto CRUD ──────────────────────────────────────
-
+@login_required
 def projeto_create_view(request):
     form = ProjetoForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -85,7 +86,7 @@ def projeto_create_view(request):
         return redirect('projetos')
     return render(request, 'portfolio/projeto_form.html', {'form': form, 'titulo': 'Novo Projeto'})
 
-
+@login_required
 def projeto_edit_view(request, id):
     projeto = get_object_or_404(Projeto, id=id)
     form = ProjetoForm(request.POST or None, request.FILES or None, instance=projeto)
@@ -94,7 +95,7 @@ def projeto_edit_view(request, id):
         return redirect('projetos')
     return render(request, 'portfolio/projeto_form.html', {'form': form, 'titulo': f'Editar: {projeto.titulo}'})
 
-
+@login_required
 def projeto_delete_view(request, id):
     projeto = get_object_or_404(Projeto, id=id)
     if request.method == 'POST':
@@ -104,7 +105,7 @@ def projeto_delete_view(request, id):
 
 
 # ── Tecnologia CRUD ──────────────────────────────────────
-
+@login_required
 def tecnologia_create_view(request):
     form = TecnologiaForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -112,7 +113,7 @@ def tecnologia_create_view(request):
         return redirect('tecnologias')
     return render(request, 'portfolio/tecnologia_form.html', {'form': form, 'titulo': 'Nova Tecnologia'})
 
-
+@login_required
 def tecnologia_edit_view(request, id):
     tecnologia = get_object_or_404(Tecnologia, id=id)
     form = TecnologiaForm(request.POST or None, request.FILES or None, instance=tecnologia)
@@ -121,7 +122,7 @@ def tecnologia_edit_view(request, id):
         return redirect('tecnologias')
     return render(request, 'portfolio/tecnologia_form.html', {'form': form, 'titulo': f'Editar: {tecnologia.nome}'})
 
-
+@login_required
 def tecnologia_delete_view(request, id):
     tecnologia = get_object_or_404(Tecnologia, id=id)
     if request.method == 'POST':
@@ -131,7 +132,7 @@ def tecnologia_delete_view(request, id):
 
 
 # ── Competencia CRUD ─────────────────────────────────────
-
+@login_required
 def competencia_create_view(request):
     form = CompetenciaForm(request.POST or None)
     if form.is_valid():
@@ -139,7 +140,7 @@ def competencia_create_view(request):
         return redirect('competencias')
     return render(request, 'portfolio/competencia_form.html', {'form': form, 'titulo': 'Nova Competência'})
 
-
+@login_required
 def competencia_edit_view(request, id):
     competencia = get_object_or_404(Competencia, id=id)
     form = CompetenciaForm(request.POST or None, instance=competencia)
@@ -148,7 +149,7 @@ def competencia_edit_view(request, id):
         return redirect('competencias')
     return render(request, 'portfolio/competencia_form.html', {'form': form, 'titulo': f'Editar: {competencia.nome}'})
 
-
+@login_required
 def competencia_delete_view(request, id):
     competencia = get_object_or_404(Competencia, id=id)
     if request.method == 'POST':
@@ -158,7 +159,7 @@ def competencia_delete_view(request, id):
 
 
 # ── Formacao CRUD ────────────────────────────────────────
-
+@login_required
 def formacao_create_view(request):
     form = FormacaoForm(request.POST or None)
     if form.is_valid():
@@ -166,7 +167,7 @@ def formacao_create_view(request):
         return redirect('formacoes')
     return render(request, 'portfolio/formacao_form.html', {'form': form, 'titulo': 'Nova Formação'})
 
-
+@login_required
 def formacao_edit_view(request, id):
     formacao = get_object_or_404(Formacao, id=id)
     form = FormacaoForm(request.POST or None, instance=formacao)
@@ -175,7 +176,7 @@ def formacao_edit_view(request, id):
         return redirect('formacoes')
     return render(request, 'portfolio/formacao_form.html', {'form': form, 'titulo': f'Editar: {formacao.titulo}'})
 
-
+@login_required
 def formacao_delete_view(request, id):
     formacao = get_object_or_404(Formacao, id=id)
     if request.method == 'POST':

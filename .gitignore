@@ -1,4 +1,7 @@
 venv/
+.env
 reminders.txt
 .claude
 to_do.txt
+__pycache__/
+*.sqlite3

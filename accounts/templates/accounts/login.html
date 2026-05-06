@@ -1,0 +1,43 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<div style="max-width:440px; margin:60px auto;">
+    <article class="form-card">
+        <header>
+            <h3>Entrar na conta</h3>
+            <p>Acede ao teu portfolio pessoal.</p>
+        </header>
+
+        {% if mensagem %}
+            <p class="form-error" style="margin-bottom:16px;">{{ mensagem }}</p>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-field">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" required autofocus>
+            </div>
+
+            <div class="form-field">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+
+            <div class="form-actions" style="flex-direction:column; gap:10px; border-top:none; padding-top:0; margin-top:8px;">
+                <button type="submit" class="btn btn-primary" style="width:100%; text-align:center;">Entrar</button>
+            </div>
+        </form>
+
+        <div style="margin-top:20px; padding-top:18px; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:8px; align-items:center;">
+            <a href="{% url 'magic_link_request' %}" style="font-size:13px; color:var(--accent); text-decoration:none; font-weight:500;">
+                Sem password? Entrar com link mágico
+            </a>
+            <span style="font-size:13px; color:var(--text-faint);">
+                Não tens conta? <a href="{% url 'registo_view' %}" style="color:var(--accent); text-decoration:none; font-weight:500;">Regista-te aqui</a>
+            </span>
+        </div>
+    </article>
+</div>
+{% endblock %}

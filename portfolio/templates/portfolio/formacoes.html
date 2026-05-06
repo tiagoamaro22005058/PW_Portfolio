@@ -3,7 +3,9 @@
 {% block content %}
 <div class="page-header">
     <h2 class="page-title">Formações</h2>
+    {% if is_gestor %}
     <a href="{% url 'formacao_criar' %}" class="btn btn-primary">+ Nova Formação</a>
+    {% endif %}
 </div>
 
 <section class="cards-grid">
@@ -23,8 +25,10 @@
         {% endif %}
 
         <div class="card-actions">
+            {% if is_gestor %}
             <a href="{% url 'formacao_editar' formacao.id %}" class="card-link">Editar</a>
             <a href="{% url 'formacao_apagar' formacao.id %}" class="card-link card-link--danger">Apagar</a>
+            {% endif %}
         </div>
     </article>
     {% endfor %}
