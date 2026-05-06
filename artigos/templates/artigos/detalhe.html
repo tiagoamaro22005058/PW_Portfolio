@@ -1,0 +1,88 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h2 class="page-title">{{ artigo.titulo }}</h2>
+    {% if request.user == artigo.autor %}
+        <a href="{% url 'editar_artigo' artigo.pk %}" class="btn btn-secondary">Editar</a>
+    {% endif %}
+</div>
+
+<section class="sobre-section">
+    <p class="sobre-title">
+        {{ artigo.autor.get_full_name|default:artigo.autor.username }}
+        &nbsp;&middot;&nbsp;
+        {{ artigo.data_criacao|date:"d \d\e F \d\e Y" }}
+        &nbsp;&middot;&nbsp;
+        &#10084; {{ artigo.total_likes }}
+        &nbsp;&middot;&nbsp;
+        &#128172; {{ comentarios.count }}
+    </p>
+
+    {% if artigo.fotografia %}
+    <div style="margin: 0 0 24px;">
+        <img src="{{ artigo.fotografia.url }}" alt="{{ artigo.titulo }}"
+             style="width:100%; max-height:420px; object-fit:cover; border-radius:10px; border:1px solid var(--border);">
+    </div>
+    {% endif %}
+
+    <div class="sobre-body">
+        <p>{{ artigo.texto|linebreaks }}</p>
+    </div>
+
+    {% if artigo.link_externo %}
+    <div style="margin-top:20px;">
+        <a href="{{ artigo.link_externo }}" target="_blank" rel="noopener" class="card-link card-link--demo">
+            &#127760; Ver fonte externa
+        </a>
+    </div>
+    {% endif %}
+
+    <div style="margin-top:28px; padding-top:20px; border-top:1px solid var(--border); display:flex; align-items:center; gap:12px;">
+        <form method="post" action="{% url 'like_artigo' artigo.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="card-link {% if ja_gostou %}card-link--demo{% endif %}"
+                    style="background:{% if ja_gostou %}var(--accent){% else %}transparent{% endif %}; color:{% if ja_gostou %}#fff{% else %}var(--accent){% endif %}; border:1.5px solid var(--accent); cursor:pointer; font-family:inherit;">
+                &#10084; {% if ja_gostou %}Gostei ({{ artigo.total_likes }}){% else %}Gostar ({{ artigo.total_likes }}){% endif %}
+            </button>
+        </form>
+        <a href="{% url 'lista_artigos' %}" class="card-link">&larr; Voltar aos artigos</a>
+    </div>
+</section>
+
+<!-- COMENTÁRIOS -->
+<section class="sobre-section" style="margin-top:24px;">
+    <h2 class="sobre-title">Comentários ({{ comentarios.count }})</h2>
+
+    {% for comentario in comentarios %}
+    <div class="sobre-body" style="border-bottom:1px solid var(--border); padding-bottom:16px; margin-bottom:16px;">
+        <p style="font-size:12px; color:var(--text-faint); margin-bottom:6px;">
+            <strong style="color:var(--accent);">{{ comentario.autor.get_full_name|default:comentario.autor.username }}</strong>
+            &middot; {{ comentario.data|date:"d/m/Y H:i" }}
+        </p>
+        <p>{{ comentario.texto|linebreaks }}</p>
+    </div>
+    {% empty %}
+    <p class="sobre-note">Ainda sem comentários. Sê o primeiro!</p>
+    {% endfor %}
+
+    {% if request.user.is_authenticated %}
+    <div style="margin-top:20px;">
+        <h3 class="sobre-title" style="margin-bottom:14px;">Deixa o teu comentário</h3>
+        <form method="post" action="{% url 'adicionar_comentario' artigo.pk %}">
+            {% csrf_token %}
+            <div class="form-field">
+                {{ form_comentario }}
+            </div>
+            <div class="form-actions" style="border-top:none; margin-top:10px; padding-top:0;">
+                <button type="submit" class="btn btn-primary">Comentar</button>
+            </div>
+        </form>
+    </div>
+    {% else %}
+    <p class="sobre-note" style="margin-top:16px;">
+        <a href="{% url 'login_view' %}" style="color:var(--accent);">Faz login</a> para deixar um comentário.
+    </p>
+    {% endif %}
+</section>
+{% endblock %}

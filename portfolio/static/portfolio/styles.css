@@ -841,3 +841,26 @@ article.form-card--danger::before {
     background: #444d56;
     transform: translateY(-2px);
 }
+
+/* ── ARTIGOS ─────────────────────────────────────────── */
+
+/* textarea do formulário de comentário usa as mesmas regras dos form-field */
+.form-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 13px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    background: var(--bg);
+    color: var(--text);
+    resize: vertical;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.form-field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(139,94,60,0.1);
+}

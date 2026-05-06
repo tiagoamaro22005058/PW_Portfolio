@@ -1,0 +1,39 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h2 class="page-title">Artigos</h2>
+    {% if request.user.is_authenticated %}
+        {% for g in request.user.groups.all %}
+            {% if g.name == 'autores' %}
+                <a href="{% url 'criar_artigo' %}" class="btn btn-primary">+ Novo Artigo</a>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>
+
+<section class="cards-grid">
+    {% for artigo in artigos %}
+    <article>
+        {% if artigo.fotografia %}
+            <img class="card-img" src="{{ artigo.fotografia.url }}" alt="{{ artigo.titulo }}">
+        {% endif %}
+        <header>
+            <h3><a href="{% url 'detalhe_artigo' artigo.pk %}">{{ artigo.titulo }}</a></h3>
+            <p>{{ artigo.autor.get_full_name|default:artigo.autor.username }} &middot; {{ artigo.data_criacao|date:"d/m/Y" }}</p>
+        </header>
+        <section>
+            <h4>Resumo</h4>
+            <p class="desc">{{ artigo.texto|truncatewords:28 }}</p>
+        </section>
+        <div class="card-links">
+            <span class="card-link" style="cursor:default;">&#10084; {{ artigo.total_likes }}</span>
+            <span class="card-link" style="cursor:default;">&#128172; {{ artigo.comentarios.count }}</span>
+            <a href="{% url 'detalhe_artigo' artigo.pk %}" class="card-link card-link--demo">Ler artigo</a>
+        </div>
+    </article>
+    {% empty %}
+    <p style="color:var(--text-muted); font-size:14px;">Ainda não há artigos publicados.</p>
+    {% endfor %}
+</section>
+{% endblock %}

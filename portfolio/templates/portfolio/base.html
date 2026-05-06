@@ -21,6 +21,7 @@
             <a href="{% url 'formacoes' %}">Formações</a>
             <a href="{% url 'making_of' %}">Making Of</a>
             <a href="{% url 'sobre' %}">Sobre</a>
+            <a href="{% url 'lista_artigos' %}">Artigos</a>
         </nav>
         <div style="display:flex; align-items:center; gap:10px; margin-left:auto;">
             {% if request.user.is_authenticated %}
