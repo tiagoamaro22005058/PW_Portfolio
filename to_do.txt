@@ -1,0 +1,130 @@
+==============================================================
+  MIGRAÇÃO SQLITE → NEON (PostgreSQL)
+==============================================================
+
+PROBLEMA: loaddata falha com UniqueViolation em auth.Permission
+porque o migrate já cria esses registos automaticamente no Neon.
+
+PASSOS:
+
+1. Em project/settings.py, comentar o bloco Neon (últimas 3 linhas):
+     # DATABASES = {
+     #     "default": env.db("DATABASE_URL")
+     # }
+
+2. Re-exportar dados do SQLite, excluindo as tabelas conflituosas:
+     python manage.py dumpdata --exclude auth.permission --exclude contenttypes --natural-foreign --natural-primary --indent 2 -o dados.json
+
+3. Restaurar o bloco Neon em settings.py (descomentar as 3 linhas).
+
+4. Carregar dados no Neon:
+     python manage.py migrate --run-syncdb
+     python manage.py flush --no-input
+     python manage.py loaddata dados.json
+
+==============================================================
+  APP ARTIGOS — Como foi implementada
+==============================================================
+
+1. CRIAÇÃO DA APP
+-----------------
+- Correu-se: python manage.py startapp artigos
+- Adicionou-se 'artigos' a INSTALLED_APPS em project/settings.py
+- Adicionou-se path("artigos/", include("artigos.urls")) em project/urls.py
+
+
+2. MODELOS (artigos/models.py)
+------------------------------
+Foram criados 3 modelos:
+
+  Artigo
+    - titulo        (CharField)
+    - texto         (TextField)
+    - fotografia    (ImageField, opcional)
+    - link_externo  (URLField, opcional)
+    - data_criacao  (DateTimeField, auto_now_add=True)
+    - autor         (ForeignKey -> User)
+
+  Like
+    - artigo   (ForeignKey -> Artigo)
+    - sessao   (CharField — chave de sessão do browser)
+    - unique_together: (artigo, sessao) — impede duplicados
+    - Qualquer pessoa pode dar like (sem login), baseado na sessão
+
+  Comentario
+    - artigo  (ForeignKey -> Artigo)
+    - autor   (ForeignKey -> User)
+    - texto   (TextField)
+    - data    (DateTimeField, auto_now_add=True)
+
+
+3. MIGRAÇÕES
+------------
+- python manage.py makemigrations artigos  → cria 0001_initial.py
+- python manage.py migrate
+
+Foi também criada uma migration de dados (0002_criar_grupo_autores.py)
+que usa RunPython para criar o grupo 'autores' na base de dados
+com permissões: add_artigo, change_artigo, view_artigo.
+
+
+4. GRUPO AUTORES E SIGNAL (artigos/signals.py)
+----------------------------------------------
+- Criou-se um signal post_save no modelo User.
+- Sempre que um novo utilizador é criado, é automaticamente
+  adicionado ao grupo 'autores'.
+- O signal é registado em artigos/apps.py no método ready().
+
+
+5. VISTAS (artigos/views.py)
+-----------------------------
+  lista_artigos       → pública, mostra todos os artigos
+  detalhe_artigo      → pública, mostra artigo + likes + comentários
+  criar_artigo        → requer login + grupo 'autores'
+  editar_artigo       → requer login + grupo 'autores' + ser o autor
+  like_artigo         → qualquer pessoa (usa sessão, toggle)
+  adicionar_comentario → requer login
+
+  Permissão de edição verificada manualmente na view:
+    if not _is_autor(request.user) or artigo.autor != request.user:
+        raise PermissionDenied
+
+
+6. FORMULÁRIOS (artigos/forms.py)
+----------------------------------
+  ArtigoForm    → campos: titulo, texto, fotografia, link_externo
+  ComentarioForm → campo: texto (textarea, sem label)
+
+
+7. URLs (artigos/urls.py)
+--------------------------
+  /artigos/                  → lista_artigos
+  /artigos/<id>/             → detalhe_artigo
+  /artigos/novo/             → criar_artigo
+  /artigos/<id>/editar/      → editar_artigo
+  /artigos/<id>/like/        → like_artigo
+  /artigos/<id>/comentar/    → adicionar_comentario
+
+
+8. ADMIN (artigos/admin.py)
+-----------------------------
+- Registaram-se os modelos Artigo, Comentario e Like no admin.
+
+
+9. TEMPLATES (artigos/templates/artigos/)
+-----------------------------------------
+  lista.html   → usa cards-grid + article (mesmo padrão que Projetos)
+  detalhe.html → usa sobre-section (mesmo padrão que a página Sobre)
+  form.html    → usa form-card + form-field (mesmo padrão que projeto_form)
+
+  Todos estendem 'portfolio/base.html' para manter o layout consistente.
+  Não foi adicionado CSS próprio — reutilizaram-se as classes existentes.
+
+
+10. MENU
+--------
+- Adicionou-se <a href="{% url 'lista_artigos' %}">Artigos</a>
+  ao nav em portfolio/templates/portfolio/base.html
+
+
+==============================================================

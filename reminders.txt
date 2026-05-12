@@ -1,0 +1,18 @@
+python3 -m venv venv
+source venv/bin/activate 
+
+models.py->admin.py
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py runserver
+
+
+
+python manage.py shell < portfolio/load_tfcs.py
+
+admin 
+admin0000
+
+phil
+amaroamaro
