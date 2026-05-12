@@ -30,7 +30,15 @@ SECRET_KEY = 'django-insecure-91u7@%$2mygk@-#+n&^p(fh@4i=j^)b*d1-6%p_$%^5zqz+ll*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'tiagoamaro.pw.deisi.ulusofona.pt',
+    'localhost',
+    '127.0.0.1',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://tiagoamaro.pw.deisi.ulusofona.pt',
+]
 
 
 # Application definition
