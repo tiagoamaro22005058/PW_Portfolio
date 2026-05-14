@@ -16,3 +16,22 @@ admin0000
 
 phil
 amaroamaro
+
+
+--- FLUXO DE DESENVOLVIMENTO ---
+
+1. Desenvolves no PW_Portfolio (repo pessoal)
+   - Fazes alterações e testes localmente
+   - Commit + push para o teu GitHub pessoal
+
+2. Copias para tiagoamaro (repo da cadeira que faz deploy)
+   - Copias os ficheiros alterados
+   - Commit + push -> dispara GitHub Actions -> build Docker -> deploy no servidor DEISI
+
+--- REGRAS A LEMBRAR ---
+
+- Imagens fixas do site (ex: Me.png) -> portfolio/static/portfolio/img/ e usar {% static %}
+- Imagens carregadas via admin (projetos, artigos, etc.) -> vao automaticamente para Cloudinary
+- Variaveis sensiveis (passwords, chaves API) -> Secrets do GitHub no repo tiagoamaro, nunca no codigo
+- Novas dependencias Python -> adicionar ao requirements.txt antes de fazer push, senao o Docker falha
+- Novas paginas com templates -> o Dockerfile ja corre collectstatic automaticamente no deploy

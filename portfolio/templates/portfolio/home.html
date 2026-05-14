@@ -1,15 +1,16 @@
 {% extends 'portfolio/base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="hero">
     <div class="hero-content">
-        <h2>Olá, sou o <span>Tiago</span></h2>
+        <h2>Olá, sou o <span>Tiago Amaro</span></h2>
         <p>Estudante de Informática de Gestão. Aqui encontras os meus projetos, formações e percurso académico.</p>
     </div>
 
     <div class="hero-image">
         <div class="hero-image-bg"></div>
-        <img src="https://res.cloudinary.com/dsubpp0vj/image/upload/v1778597745/hero_page/Me.png" alt="Tiago">
+        <img src="{% static 'portfolio/img/Me.png' %}" alt="Tiago">
     </div>
 </div>
 {% endblock %}
