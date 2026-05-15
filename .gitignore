@@ -1,5 +1,6 @@
 venv/
 .env
+media/
 reminders.txt
 .claude
 to_do.txt

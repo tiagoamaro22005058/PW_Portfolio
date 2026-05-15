@@ -39,6 +39,11 @@ CSRF_TRUSTED_ORIGINS = [
     'https://tiagoamaro.pw.deisi.ulusofona.pt',
 ]
 
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+SITE_URL = env('SITE_URL', default='http://localhost:8000')
+
 
 # Application definition
 

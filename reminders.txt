@@ -25,8 +25,15 @@ amaroamaro
    - Commit + push para o teu GitHub pessoal
 
 2. Copias para tiagoamaro (repo da cadeira que faz deploy)
-   - Copias os ficheiros alterados
-   - Commit + push -> dispara GitHub Actions -> build Docker -> deploy no servidor DEISI
+
+   cd /home/phil/PW/github_reps/tiagoamaro
+   rsync -av --exclude='.git' --exclude='venv' --exclude='media/' --exclude='*.pyc' --exclude='__pycache__' --exclude='.env' --exclude='db.sqlite3' /home/phil/PW/github_reps/PW_Portfolio/ .
+
+   git add .
+   git commit -m "descrição"
+   git push
+
+   -> dispara GitHub Actions -> build Docker -> deploy no servidor DEISI
 
 --- REGRAS A LEMBRAR ---
 

@@ -44,7 +44,7 @@ def magic_link_request_view(request):
         try:
             user = User.objects.get(email=email)
             token_obj = MagicLinkToken.objects.create(user=user)
-            link = request.build_absolute_uri(f'/accounts/magic/{token_obj.token}/')
+            link = f"{settings.SITE_URL}/accounts/magic/{token_obj.token}/"
             send_mail(
                 subject='O teu link de acesso',
                 message=f'Clica no link para entrares:\n\n{link}\n\nExpira em 15 minutos.',
