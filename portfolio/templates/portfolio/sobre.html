@@ -1,4 +1,5 @@
 {% extends 'portfolio/base.html' %}
+{% load static %}
 
 {% block content %}
 <h2 class="page-title">Sobre esta Aplicação</h2>
@@ -14,7 +15,7 @@
             O <strong>Template</strong> recebe o contexto da view e produz o HTML final enviado ao browser.
         </p>
         <div class="mvt-diagram">
-            <img src="/media/sobre/mvt_diagram_django.svg" alt="Diagrama MVT Django" class="mvt-img">
+            <img src="{% static 'portfolio/img/mvt_diagram_django.svg' %}" alt="Diagrama MVT Django" class="mvt-img">
         </div>
         <p class="sobre-note">
             Fluxo: o browser envia um pedido → o URL dispatcher chama a view correta →
@@ -23,9 +24,29 @@
     </div>
 </section>
 
-<!-- ── 2. Modelação de Dados ──────────────────────────── -->
+<!-- ── 2. Arquitetura Geral ────────────────────────────── -->
 <section class="sobre-section">
-    <h2 class="sobre-title">2. Modelação de Dados</h2>
+    <h2 class="sobre-title">2. Arquitetura Geral do Projeto</h2>
+    <div class="sobre-body">
+        <p>
+            A aplicação corre num container <strong>Docker</strong> que agrega o servidor Django (Gunicorn) e os ficheiros estáticos (WhiteNoise).
+            O container liga-se a dois serviços externos: a base de dados <strong>PostgreSQL na Neon</strong> (cloud) e o armazenamento de
+            ficheiros media no <strong>Cloudinary</strong>. Em desenvolvimento, o container é executado localmente.
+        </p>
+        <p>
+            Quando as alterações estão prontas, são copiadas para o repositório de deploy e feito <strong>push para o GitHub</strong>.
+            Esse push dispara automaticamente um workflow de <strong>GitHub Actions</strong> que constrói a imagem Docker e faz deploy
+            para o servidor de produção da <strong>DEISI (Universidade Lusófona)</strong>, onde a aplicação fica acessível publicamente.
+        </p>
+        <div class="mvt-diagram">
+            <img src="{% static 'portfolio/img/arq.jpg' %}" alt="Arquitetura Geral do Projeto" class="mvt-img">
+        </div>
+    </div>
+</section>
+
+<!-- ── 3. Modelação de Dados ──────────────────────────── -->
+<section class="sobre-section">
+    <h2 class="sobre-title">3. Modelação de Dados</h2>
     <div class="sobre-body">
         <div class="cards-grid cards-grid--3">
             {% for modelo in modelos %}
@@ -35,6 +56,7 @@
                 </div>
                 <header>
                     <h3>{{ modelo.nome }}</h3>
+                    <p class="modelo-app">app: {{ modelo.app }}</p>
                     {% if modelo.relacoes %}<p>{{ modelo.relacoes }}</p>{% endif %}
                 </header>
                 <section>
@@ -53,7 +75,7 @@
 
 <!-- ── 3. Tecnologias Utilizadas ──────────────────────── -->
 <section class="sobre-section">
-    <h2 class="sobre-title">3. Tecnologias Utilizadas</h2>
+    <h2 class="sobre-title">4. Tecnologias Utilizadas</h2>
     <div class="sobre-body">
         {% if tecnologias %}
         <div class="cards-grid cards-grid--3">
@@ -85,15 +107,53 @@
 
 <!-- ── 4. Estrutura de Navegação ──────────────────────── -->
 <section class="sobre-section">
-    <h2 class="sobre-title">4. Estrutura de Navegação</h2>
+    <h2 class="sobre-title">5. Estrutura de Navegação</h2>
     <div class="sobre-body">
-        <img src="/media/sobre/nav_estrutura.png" alt="Estrutura de Navegação" class="mvt-img">
+        <div class="nav-tree">
+            <ul>
+                <li class="nav-root">/ (Home)
+                    <ul>
+                        <li>licenciaturas/
+                            <ul>
+                                <li>licenciatura/&lt;id&gt;
+                                    <ul><li>unidade_curricular/&lt;id&gt;</li></ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>projetos/ <span class="nav-crud">CRUD</span></li>
+                        <li>competencias/ <span class="nav-crud">CRUD</span></li>
+                        <li>formacoes/ <span class="nav-crud">CRUD</span></li>
+                        <li>tecnologias/ <span class="nav-crud">CRUD</span></li>
+                        <li>making_of/</li>
+                        <li>sobre/</li>
+                        <li>artigos/</li>
+                        <li>escola/</li>
+                        <li>accounts/
+                            <ul>
+                                <li>login/</li>
+                                <li>magic/ (magic link)</li>
+                                <li>logout/</li>
+                            </ul>
+                        </li>
+                        <li>admin/</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ── 5. Vídeo de Apresentação ───────────────────────── -->
+<section class="sobre-section">
+    <h2 class="sobre-title">6. Vídeo de Apresentação</h2>
+    <div class="sobre-body">
+        <p class="sobre-note">Vídeo de demonstração da aplicação — em breve no YouTube.</p>
     </div>
 </section>
 
 <!-- ── 5. Repositório GitHub ──────────────────────────── -->
 <section class="sobre-section">
-    <h2 class="sobre-title">5. Repositório GitHub</h2>
+    <h2 class="sobre-title">7. Repositório GitHub</h2>
     <div class="sobre-body">
         <p>
             O código fonte desta aplicação está disponível publicamente no GitHub.
@@ -108,7 +168,7 @@
 
 <!-- ── 6. Making Of ───────────────────────────────────── -->
 <section class="sobre-section">
-    <h2 class="sobre-title">6. Making Of</h2>
+    <h2 class="sobre-title">8. Making Of</h2>
     <div class="sobre-body">
         {% if registos %}
         <div class="cards-grid">

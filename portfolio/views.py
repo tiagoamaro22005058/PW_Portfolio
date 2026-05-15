@@ -62,14 +62,22 @@ def sobre_view(request):
     ).order_by('categoria', 'nome')
     registos = MakingOf.objects.all()
     modelos = [
-        {'icone': '🎓', 'nome': 'Licenciatura',        'relacoes': None,                           'campos': ['nome, sigla, grau', 'duração, descrição', 'imagem, URLs']},
-        {'icone': '📚', 'nome': 'UnidadeCurricular',   'relacoes': '→ Licenciatura (FK) · → Docente (M2M)', 'campos': ['nome, sigla', 'ano, semestre, ECTS']},
-        {'icone': '👤', 'nome': 'Docente',             'relacoes': None,                           'campos': ['nome, email', 'foto, URL perfil']},
-        {'icone': '🗂️', 'nome': 'Projeto',             'relacoes': '→ UC (FK) · → Tecnologia (M2M)', 'campos': ['título, descrição, nota', 'ano, GitHub, demo, imagem']},
-        {'icone': '⚙️', 'nome': 'Tecnologia',          'relacoes': None,                           'campos': ['nome, categoria', 'descrição, logo', 'nível de interesse']},
-        {'icone': '🧠', 'nome': 'Competência',         'relacoes': '→ Tecnologia (M2M) · → Projeto (M2M)', 'campos': ['nome, tipo, nível', 'descrição']},
-        {'icone': '📜', 'nome': 'Formação',            'relacoes': None,                           'campos': ['título, instituição, tipo', 'datas, certificado URL']},
-        {'icone': '📝', 'nome': 'MakingOf',            'relacoes': None,                           'campos': ['entidade relacionada', 'decisões, erros', 'justificações, foto']},
+        # portfolio
+        {'icone': '🎓', 'nome': 'Licenciatura',        'app': 'portfolio', 'relacoes': None,                                        'campos': ['nome, sigla, grau', 'duração, descrição', 'imagem, URLs']},
+        {'icone': '📚', 'nome': 'UnidadeCurricular',   'app': 'portfolio', 'relacoes': '→ Licenciatura (FK) · → Docente (M2M)',     'campos': ['nome, sigla', 'ano, semestre, ECTS', 'concluída, URL ficha']},
+        {'icone': '👤', 'nome': 'Docente',             'app': 'portfolio', 'relacoes': None,                                        'campos': ['nome, email', 'foto, URL perfil']},
+        {'icone': '🗂️', 'nome': 'Projeto',             'app': 'portfolio', 'relacoes': '→ UC (FK) · → Tecnologia (M2M)',            'campos': ['título, descrição, nota', 'ano, GitHub, demo, imagem']},
+        {'icone': '⚙️', 'nome': 'Tecnologia',          'app': 'portfolio', 'relacoes': None,                                        'campos': ['nome, categoria', 'descrição, logo', 'nível de interesse']},
+        {'icone': '🧠', 'nome': 'Competência',         'app': 'portfolio', 'relacoes': '→ Tecnologia (M2M) · → Projeto (M2M)',      'campos': ['nome, tipo, nível', 'descrição']},
+        {'icone': '📜', 'nome': 'Formação',            'app': 'portfolio', 'relacoes': None,                                        'campos': ['título, instituição, tipo', 'datas, certificado URL']},
+        {'icone': '🏆', 'nome': 'TFC',                 'app': 'portfolio', 'relacoes': None,                                        'campos': ['título, autores, orientadores', 'ano, curso, sumário', 'palavras-chave, áreas, PDF, rating']},
+        {'icone': '📝', 'nome': 'MakingOf',            'app': 'portfolio', 'relacoes': None,                                        'campos': ['entidade relacionada', 'decisões, erros', 'justificações, foto']},
+        # artigos
+        {'icone': '📰', 'nome': 'Artigo',              'app': 'artigos',   'relacoes': '→ User (FK)',                               'campos': ['título, texto', 'fotografia, link externo', 'data criação']},
+        {'icone': '👍', 'nome': 'Like',                'app': 'artigos',   'relacoes': '→ Artigo (FK)',                             'campos': ['sessão (unique por artigo)']},
+        {'icone': '💬', 'nome': 'Comentario',          'app': 'artigos',   'relacoes': '→ Artigo (FK) · → User (FK)',               'campos': ['texto, data']},
+        # accounts
+        {'icone': '🔑', 'nome': 'MagicLinkToken',      'app': 'accounts',  'relacoes': '→ User (FK)',                               'campos': ['token (UUID)', 'criado em, usado', 'expira em 15 min']},
     ]
     return render(request, 'portfolio/sobre.html', {
         'tecnologias': tecnologias,
