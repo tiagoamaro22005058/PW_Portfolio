@@ -1,4 +1,7 @@
 asgiref==3.11.1
+cryptography==48.0.0
+django-allauth==65.16.1
+PyJWT==2.12.1
 certifi==2026.4.22
 charset-normalizer==3.4.7
 cloudinary==1.44.2

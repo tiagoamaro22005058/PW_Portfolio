@@ -42,3 +42,37 @@ amaroamaro
 - Variaveis sensiveis (passwords, chaves API) -> Secrets do GitHub no repo tiagoamaro, nunca no codigo
 - Novas dependencias Python -> adicionar ao requirements.txt antes de fazer push, senao o Docker falha
 - Novas paginas com templates -> o Dockerfile ja corre collectstatic automaticamente no deploy
+
+
+
+
+--- SESSÃO 2026-05-16 | OAuth com Google (Ficha 11) ---
+
+Ficheiros alterados:
+- project/middleware.py        (NOVO) - força host correto para OAuth via SITE_URL
+- project/settings.py          - adicionado django.contrib.sites ao INSTALLED_APPS
+                               - adicionado SiteUrlHostMiddleware ao topo do MIDDLEWARE
+- project/urls.py              - adicionado path("social/", include("allauth.urls"))
+- accounts/templates/accounts/login.html - botão "Entrar com Google"
+- requirements.txt             - adicionado django-allauth, PyJWT, cryptography
+
+Migrações corridas: account, sites, socialaccount
+
+Configuração necessária no /admin de produção:
+1. Sites -> editar id=1 para: tiagoamaro.pw.deisi.ulusofona.pt
+2. Social Applications -> Add -> Provider: Google
+   - Client ID e Secret do Google Cloud Console
+   - Mover o site para Chosen sites
+
+Google Cloud Console - redirect URIs a registar:
+- https://tiagoamaro.pw.deisi.ulusofona.pt/social/google/login/callback/
+- http://localhost:8000/social/google/login/callback/  (para teste local)
+
+Erro que apareceu: redirect_uri_mismatch com http://localhost
+Causa: proxy DEISI nao passava X-Forwarded-Host correto
+Fix: middleware SiteUrlHostMiddleware usa SITE_URL (ja definido nos secrets do workflow)
+
+
+--- Defesa ---
+
+

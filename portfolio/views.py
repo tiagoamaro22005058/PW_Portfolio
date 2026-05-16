@@ -58,7 +58,7 @@ def making_of_view(request):
 
 def sobre_view(request):
     tecnologias = Tecnologia.objects.filter(
-        nome__in=['Django', 'HTML', 'CSS', 'Git', 'GitHub']
+        nome__in=['Django', 'HTML', 'CSS', 'Git', 'GitHub','Neon','Cloudinary']
     ).order_by('categoria', 'nome')
     registos = MakingOf.objects.all()
     modelos = [

@@ -30,7 +30,11 @@
             </div>
         </form>
 
+        {% load socialaccount %}
         <div style="margin-top:20px; padding-top:18px; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:8px; align-items:center;">
+            <a href="{% provider_login_url 'google' %}" class="btn btn-primary" style="width:100%; text-align:center;">
+                Entrar com Google
+            </a>
             <a href="{% url 'magic_link_request' %}" style="font-size:13px; color:var(--accent); text-decoration:none; font-weight:500;">
                 Sem password? Entrar com link mágico
             </a>
