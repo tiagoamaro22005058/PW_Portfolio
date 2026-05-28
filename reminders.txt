@@ -11,11 +11,8 @@ python manage.py runserver
 
 python manage.py shell < portfolio/load_tfcs.py
 
-admin 
-admin0000
-
-phil
-amaroamaro
+admin admin0000 
+phil amaroamaro
 
 
 --- FLUXO DE DESENVOLVIMENTO ---
@@ -42,6 +39,9 @@ amaroamaro
 - Variaveis sensiveis (passwords, chaves API) -> Secrets do GitHub no repo tiagoamaro, nunca no codigo
 - Novas dependencias Python -> adicionar ao requirements.txt antes de fazer push, senao o Docker falha
 - Novas paginas com templates -> o Dockerfile ja corre collectstatic automaticamente no deploy
+
+
+
 
 
 
@@ -75,4 +75,114 @@ Fix: middleware SiteUrlHostMiddleware usa SITE_URL (ja definido nos secrets do w
 
 --- Defesa ---
 
+
+1. ADICIONAR/EDITAR CONTEUDO VIA FORM
+   - Form para adicionar um projeto, competencia, formacao, artigo, etc.
+   - View que processa o form (GET mostra form, POST valida e guarda)
+   - Usar ModelForm do Django (class ProjetoForm(forms.ModelForm))
+
+   EXEMPLO COMPLETO: CRUD de Unidades Curriculares (nao tem criar/editar/apagar)
+   O padrao e igual ao que ja existe para Tecnologia, Projeto, Competencia, Formacao.
+
+   PASSO 1 — portfolio/forms.py (adicionar no fim do ficheiro):
+   --------------------------------------------------------------
+   class UnidadeCurricularForm(forms.ModelForm):
+       class Meta:
+           model = UnidadeCurricular
+           fields = ['licenciatura', 'nome', 'sigla', 'ano', 'semestre',
+                     'ects', 'descricao', 'imagem', 'url_ficha', 'concluida', 'docentes']
+
+   PASSO 2 — portfolio/views.py (adicionar no fim do ficheiro):
+   --------------------------------------------------------------
+   @login_required
+   def uc_create_view(request):
+       form = UnidadeCurricularForm(request.POST or None, request.FILES or None)
+       if form.is_valid():
+           form.save()
+           return redirect('ucs')
+       return render(request, 'portfolio/uc_form.html', {'form': form})
+
+   @login_required
+   def uc_edit_view(request, id):
+       uc = get_object_or_404(UnidadeCurricular, id=id)
+       form = UnidadeCurricularForm(request.POST or None, request.FILES or None, instance=uc)
+       if form.is_valid():
+           form.save()
+           return redirect('ucs')
+       return render(request, 'portfolio/uc_form.html', {'form': form})
+
+   @login_required
+   def uc_delete_view(request, id):
+       uc = get_object_or_404(UnidadeCurricular, id=id)
+       if request.method == 'POST':
+           uc.delete()
+           return redirect('ucs')
+       return render(request, 'portfolio/uc_confirm_delete.html', {'uc': uc})
+
+   PASSO 3 — portfolio/urls.py (adicionar a seguir ao path uc_view):
+   ------------------------------------------------------------------
+   path('unidades_curriculares/criar/', views.uc_create_view, name='uc_criar'),
+   path('unidade_curricular/<int:id>/editar/', views.uc_edit_view, name='uc_editar'),
+   path('unidade_curricular/<int:id>/apagar/', views.uc_delete_view, name='uc_apagar'),
+
+   PASSO 4 — criar portfolio/templates/portfolio/uc_form.html:
+   -----------------------------------------------------------
+   (copiar de tecnologia_form.html e ajustar o titulo)
+
+   PASSO 5 — criar portfolio/templates/portfolio/uc_confirm_delete.html:
+   ---------------------------------------------------------------------
+   (copiar de tecnologia_confirm_delete.html e ajustar)
+
+   PASSO 6 — adicionar botoes na pagina ucs.html:
+   -----------------------------------------------
+   {% if user.is_authenticated %}
+       <a href="{% url 'uc_criar' %}" class="btn btn-primary">+ Adicionar UC</a>
+   {% endif %}
+   (e junto a cada UC: links para editar e apagar)
+
+
+
+2. CRIAR NOVA PAGINA COM LINK NO HEADER
+   Exemplo: pagina "Certificados"
+
+   PASSO 1 — portfolio/views.py (adicionar no fim):
+   -------------------------------------------------
+   def certificados_view(request):
+       return render(request, 'portfolio/certificados.html')
+
+   PASSO 2 — portfolio/urls.py (adicionar na lista):
+   --------------------------------------------------
+   path('certificados/', views.certificados_view, name='certificados'),
+
+   PASSO 3 — criar portfolio/templates/portfolio/certificados.html:
+   ----------------------------------------------------------------
+   {% extends 'portfolio/base.html' %}
+   {% block content %}
+   <h2>Certificados</h2>
+   <p>Conteudo da pagina aqui.</p>
+   {% endblock %}
+
+   PASSO 4 — portfolio/templates/portfolio/base.html (adicionar no <nav>):
+   ------------------------------------------------------------------------
+   <a href="{% url 'certificados' %}">Certificados</a>
+
+   SO 4 PASSOS: view -> url -> template -> link no header
+
+
+
+3. PAGINA DE DETALHE
+   - View que recebe um id e mostra o detalhe de um objeto (ex: projeto especifico)
+   - path('projetos/<int:pk>/', views.projeto_detail, name='projeto_detail')
+
+3. PESQUISA / FILTRO
+   - Form simples com campo de texto (GET)
+   - View que filtra queryset com .filter(nome__icontains=request.GET['q'])
+
+4. CONTACTO / MENSAGEM
+   - Form de contacto (nome, email, mensagem) sem modelo associado
+   - View que envia email ou guarda numa tabela
+
+5. APAGAR COM CONFIRMACAO
+   - View que pede confirmacao antes de apagar um objeto
+   - Template com botao "Tens a certeza?" + form POST
 

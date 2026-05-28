@@ -9,3 +9,4 @@ __pycache__/
 staticfiles/
 dados.json
 migra_ficheiros.py
+defesa.txt
