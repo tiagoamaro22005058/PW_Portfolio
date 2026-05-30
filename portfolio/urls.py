@@ -31,4 +31,5 @@ urlpatterns = [
     
     path('making_of/', views.making_of_view, name='making_of'),
     path('sobre/', views.sobre_view, name='sobre'),
+
 ]
