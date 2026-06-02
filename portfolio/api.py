@@ -1,13 +1,11 @@
 from ninja import NinjaAPI
+from ninja.security import django_auth
 from .schemas import UnidadeCurricularOut, ErrorSchema, UnidadeCurricularIn, ProjetoOut, ProjetoIn, TecnologiaOut, TecnologiaIn, NoticiaOut
 from typing import List
 from .models import Noticia, UnidadeCurricular, Projeto, Tecnologia, Noticia
 
 
-api = NinjaAPI(
-    title="API RESTfull portfolio",
-    
-)   
+api = NinjaAPI(title="API RESTfull portfolio")
 
 ####UnidadesCurriculares####
 
@@ -38,7 +36,8 @@ def ver_UnidadeCurricular(request, unidade_id):
 @api.post("unidadesCurriculares/",
           response={201: UnidadeCurricularOut},
           tags=["UnidadesCurriculares"],
-          description="Criar uma nova unidade curricular"
+          description="Criar uma nova unidade curricular",
+          auth=django_auth
           )
 def criar_UnidadeCurricular(request, data:UnidadeCurricularIn):
     return 201, UnidadeCurricular.objects.create(**data.dict())
@@ -48,7 +47,8 @@ def criar_UnidadeCurricular(request, data:UnidadeCurricularIn):
 @api.put("unidadesCurriculares/{unidade_id}",
          response={200: UnidadeCurricularOut, 404: ErrorSchema},
          tags=["UnidadesCurriculares"],
-         description="Atualizar uma unidade curricular por id"
+         description="Atualizar uma unidade curricular por id",
+         auth=django_auth
         )
 def atualizar_UnidadeCurricular(request, unidade_id: int, data: UnidadeCurricularIn):
     try:
@@ -65,7 +65,8 @@ def atualizar_UnidadeCurricular(request, unidade_id: int, data: UnidadeCurricula
 @api.delete("unidadesCurriculares/{unidade_id}",
             response={204: None, 404: ErrorSchema},
             tags=["UnidadesCurriculares"],
-            description="Excluir uma unidade curricular por id"
+            description="Excluir uma unidade curricular por id",
+            auth=django_auth
             )
 def apagar_UnidadeCurricular(request, unidade_id: int):
     try:
@@ -105,7 +106,8 @@ def ver_Projeto(request, projeto_id: int):
 @api.post("projetos/",
           response={201: ProjetoOut},
           tags=["Projetos"],
-          description="Criar um novo projeto"
+          description="Criar um novo projeto",
+          auth=django_auth
           )
 def criar_Projeto(request, data: ProjetoIn):
     return 201, Projeto.objects.create(**data.dict())    
@@ -115,7 +117,8 @@ def criar_Projeto(request, data: ProjetoIn):
 @api.put("projetos/{projeto_id}",
          response={200: ProjetoOut, 404: ErrorSchema},
          tags=["Projetos"],
-         description="Atualizar um projeto por id"
+         description="Atualizar um projeto por id",
+         auth=django_auth
         )
 def atualizar_Projeto(request, projeto_id: int, data: ProjetoIn):
     try:
@@ -132,7 +135,8 @@ def atualizar_Projeto(request, projeto_id: int, data: ProjetoIn):
 @api.delete("projetos/{projeto_id}",
             response={204: None, 404: ErrorSchema},
             tags=["Projetos"],
-            description="Excluir um projeto por id"
+            description="Excluir um projeto por id",
+            auth=django_auth
             )
 def apagar_Projeto(request, projeto_id: int):
     try:
@@ -171,7 +175,8 @@ def ver_Tecnologia(request, tecnologia_id: int):
 @api.post("tecnologias/",
           response={201: TecnologiaOut},
           tags=["Tecnologias"],
-          description="Criar uma nova tecnologia"
+          description="Criar uma nova tecnologia",
+          auth=django_auth
           )
 def criar_Tecnologia(request, data: TecnologiaIn):
     return 201, Tecnologia.objects.create(**data.dict())    
@@ -180,7 +185,8 @@ def criar_Tecnologia(request, data: TecnologiaIn):
 @api.put("tecnologias/{tecnologia_id}",
          response={200: TecnologiaOut, 404: ErrorSchema},
          tags=["Tecnologias"],
-         description="Atualizar uma tecnologia por id"
+         description="Atualizar uma tecnologia por id",
+         auth=django_auth
         )
 def atualizar_Tecnologia(request, tecnologia_id: int, data: TecnologiaIn):
     try:
@@ -196,7 +202,8 @@ def atualizar_Tecnologia(request, tecnologia_id: int, data: TecnologiaIn):
 @api.delete("tecnologias/{tecnologia_id}",
             response={204: None, 404: ErrorSchema},
             tags=["Tecnologias"],
-            description="Excluir uma tecnologia por id"
+            description="Excluir uma tecnologia por id",
+            auth=django_auth
             )
 def apagar_Tecnologia(request, tecnologia_id: int):     
     try:

@@ -25,7 +25,7 @@
             <a href="{% url 'lista_artigos' %}">Artigos</a>
             {% if is_gestor %}
             <a href="/api/docs">APIs</a>
-            <a href="/api_endpoint">Endpoint API</a>
+            <a href="{% url 'api_endpoint' %}">Endpoint API</a>
             {% endif %}
         </nav>
         <div style="display:flex; align-items:center; gap:10px; margin-left:auto;">
