@@ -1,5 +1,6 @@
 from ninja import Schema
 from typing import List, Optional
+from datetime import date
 
 
 #====Unidade Curricular====
@@ -55,6 +56,16 @@ class TecnologiaIn(Schema):
     categoria: str = 'outro'    
       
       
+class NoticiaOut(Schema):
+    id: int
+    titulo: str
+    resumo: str
+    url: str
+    categoria: str
+    fonte: str
+    data_publicacao: date
+    destaque: bool
+    visualizacoes: int
       
       
       
@@ -62,4 +73,6 @@ class ErrorSchema(Schema):
     messagem: str
     
     
+    
+
     

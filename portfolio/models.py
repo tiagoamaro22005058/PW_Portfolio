@@ -153,3 +153,32 @@ class MakingOf(models.Model):
     def __str__(self):
         return f"MakingOf - {self.entidade_relacionada} ({self.data_registo.strftime('%d/%m/%Y')})"
 
+
+
+
+
+
+#Teste API calls
+class Noticia(models.Model):
+    CATEGORIA_CHOICES = [
+        ('tecnologia', 'Tecnologia'),
+        ('ciencia', 'Ciência'),
+        ('educacao', 'Educação'),
+        ('industria', 'Indústria'),
+        ('outro', 'Outro'),
+    ]
+
+    titulo = models.CharField(max_length=300)
+    resumo = models.TextField()
+    url = models.URLField(blank=True)
+    categoria = models.CharField(max_length=20, choices=CATEGORIA_CHOICES, default='outro')
+    fonte = models.CharField(max_length=100, blank=True)
+    data_publicacao = models.DateField()
+    destaque = models.BooleanField(default=False)
+    visualizacoes = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['-data_publicacao']
+
+    def __str__(self):
+        return self.titulo

@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👾</text></svg>">
+    <title>Tiago Amaro | Portfolio</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'portfolio/styles.css' %}">
 </head>
@@ -24,6 +25,7 @@
             <a href="{% url 'lista_artigos' %}">Artigos</a>
             {% if is_gestor %}
             <a href="/api/docs">APIs</a>
+            <a href="/api_endpoint">Endpoint API</a>
             {% endif %}
         </nav>
         <div style="display:flex; align-items:center; gap:10px; margin-left:auto;">

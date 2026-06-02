@@ -1,0 +1,492 @@
+[
+  {
+    "model": "portfolio.noticia",
+    "pk": 1,
+    "fields": {
+      "titulo": "Python 3.13 lançado com melhorias de desempenho significativas",
+      "resumo": "A nova versão do Python traz um interpretador mais rápido, melhor suporte a tipos e várias otimizações no GIL que prometem acelerar aplicações multi-thread.",
+      "url": "https://python.org/news/python-313",
+      "categoria": "tecnologia",
+      "fonte": "Python.org",
+      "data_publicacao": "2024-10-15",
+      "destaque": true,
+      "visualizacoes": 4821
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 2,
+    "fields": {
+      "titulo": "Django 5.1 introduz novos campos de formulário e melhorias no ORM",
+      "resumo": "A atualização do popular framework web para Python traz suporte nativo a campos de data/hora no admin, melhorias nas queries com select_related e novas opções de validação.",
+      "url": "https://djangoproject.com/releases/5.1",
+      "categoria": "tecnologia",
+      "fonte": "Django Project",
+      "data_publicacao": "2024-09-03",
+      "destaque": true,
+      "visualizacoes": 3102
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 3,
+    "fields": {
+      "titulo": "Portugal sobe no ranking europeu de literacia digital",
+      "resumo": "Segundo o relatório DESI 2024, Portugal subiu três posições no índice de digitalização, impulsionado por investimentos em educação tecnológica e infraestrutura de banda larga.",
+      "url": "https://ec.europa.eu/digital/desi2024",
+      "categoria": "educacao",
+      "fonte": "Comissão Europeia",
+      "data_publicacao": "2024-08-20",
+      "destaque": false,
+      "visualizacoes": 1540
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 4,
+    "fields": {
+      "titulo": "OpenAI apresenta GPT-5 com capacidades multimodais avançadas",
+      "resumo": "O novo modelo da OpenAI supera benchmarks anteriores em raciocínio lógico, geração de código e compreensão de imagem, aproximando-se de capacidades de nível humano em várias tarefas.",
+      "url": "https://openai.com/blog/gpt5",
+      "categoria": "tecnologia",
+      "fonte": "OpenAI",
+      "data_publicacao": "2024-11-01",
+      "destaque": true,
+      "visualizacoes": 9900
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 5,
+    "fields": {
+      "titulo": "Universidade Lusófona abre novos cursos de Inteligência Artificial",
+      "resumo": "A partir de 2025, a Lusófona passa a oferecer licenciaturas e mestrados focados em IA aplicada, machine learning e ciência de dados, em parceria com empresas tecnológicas nacionais.",
+      "url": "https://lusofona.pt/noticias/ia-2025",
+      "categoria": "educacao",
+      "fonte": "Lusófona",
+      "data_publicacao": "2024-07-10",
+      "destaque": false,
+      "visualizacoes": 870
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 6,
+    "fields": {
+      "titulo": "GitHub Copilot passa a suportar modelos alternativos como Claude e Gemini",
+      "resumo": "A Microsoft anunciou que o Copilot passará a permitir a troca do modelo de IA subjacente, dando aos programadores a opção de usar modelos da Anthropic e Google dentro do IDE.",
+      "url": "https://github.blog/copilot-multi-model",
+      "categoria": "tecnologia",
+      "fonte": "GitHub Blog",
+      "data_publicacao": "2024-10-28",
+      "destaque": true,
+      "visualizacoes": 6340
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 7,
+    "fields": {
+      "titulo": "Estudo revela que programadores com IA são 55% mais produtivos",
+      "resumo": "Uma investigação da Universidade de Stanford analisou 500 programadores durante 6 meses e concluiu que o uso de assistentes de IA como Copilot e Claude aumenta significativamente a velocidade de desenvolvimento.",
+      "url": "https://stanford.edu/studies/ai-productivity",
+      "categoria": "ciencia",
+      "fonte": "Stanford University",
+      "data_publicacao": "2024-06-15",
+      "destaque": false,
+      "visualizacoes": 2200
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 8,
+    "fields": {
+      "titulo": "Rust ultrapassa Java em popularidade entre developers europeus",
+      "resumo": "O inquérito anual da Stack Overflow indica que Rust é agora a linguagem mais admirada pelo quinto ano consecutivo, com adoção crescente em sistemas embebidos, WebAssembly e backends de alta performance.",
+      "url": "https://stackoverflow.com/survey/2024",
+      "categoria": "tecnologia",
+      "fonte": "Stack Overflow",
+      "data_publicacao": "2024-05-20",
+      "destaque": false,
+      "visualizacoes": 3780
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 9,
+    "fields": {
+      "titulo": "Novo regulamento europeu de IA entra em vigor",
+      "resumo": "O AI Act da União Europeia começa a ser aplicado faseadamente, impondo regras sobre sistemas de IA de alto risco, transparência algorítmica e proibição de certas práticas como o reconhecimento facial em espaços públicos.",
+      "url": "https://eur-lex.europa.eu/ai-act",
+      "categoria": "industria",
+      "fonte": "EUR-Lex",
+      "data_publicacao": "2024-08-01",
+      "destaque": true,
+      "visualizacoes": 5100
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 10,
+    "fields": {
+      "titulo": "WebAssembly ganha suporte a garbage collection nos principais browsers",
+      "resumo": "Chrome, Firefox e Safari passam a suportar nativamente WebAssembly GC, abrindo caminho para linguagens como Kotlin, Dart e OCaml compilarem diretamente para a web sem runtimes pesados.",
+      "url": "https://webassembly.org/news/gc-support",
+      "categoria": "tecnologia",
+      "fonte": "WebAssembly.org",
+      "data_publicacao": "2024-04-12",
+      "destaque": false,
+      "visualizacoes": 1890
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 11,
+    "fields": {
+      "titulo": "Portugal lança programa nacional de bolsas para ciência de dados",
+      "resumo": "O governo português anunciou 200 bolsas de estudo para estudantes de licenciatura e mestrado nas áreas de data science, com foco em aplicações para a saúde e administração pública.",
+      "url": "https://dgeec.mec.pt/bolsas-data-science",
+      "categoria": "educacao",
+      "fonte": "DGEEC",
+      "data_publicacao": "2024-03-05",
+      "destaque": false,
+      "visualizacoes": 620
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 12,
+    "fields": {
+      "titulo": "Next.js 15 chega com Server Actions estáveis e melhor caching",
+      "resumo": "A Vercel lançou a versão 15 do framework React, trazendo Server Actions fora de beta, partial prerendering por defeito e uma revisão completa do sistema de cache para evitar comportamentos inesperados.",
+      "url": "https://nextjs.org/blog/next-15",
+      "categoria": "tecnologia",
+      "fonte": "Vercel",
+      "data_publicacao": "2024-10-21",
+      "destaque": false,
+      "visualizacoes": 4450
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 13,
+    "fields": {
+      "titulo": "Investigadores descobrem vulnerabilidade crítica no protocolo SSH",
+      "resumo": "Uma equipa da ETH Zurique identificou uma falha no handshake do SSH que permite ataques de downgrade em certas configurações de servidor, afetando potencialmente milhões de sistemas Linux e macOS.",
+      "url": "https://ethz.ch/security/ssh-vuln-2024",
+      "categoria": "tecnologia",
+      "fonte": "ETH Zurique",
+      "data_publicacao": "2024-01-18",
+      "destaque": true,
+      "visualizacoes": 7800
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 14,
+    "fields": {
+      "titulo": "Meta lança Llama 3 com licença open-source mais permissiva",
+      "resumo": "O novo modelo de linguagem da Meta está disponível em versões de 8B, 70B e 400B parâmetros, com licença que permite uso comercial e fine-tuning, desafiando diretamente os modelos proprietários.",
+      "url": "https://ai.meta.com/blog/llama3",
+      "categoria": "tecnologia",
+      "fonte": "Meta AI",
+      "data_publicacao": "2024-04-18",
+      "destaque": true,
+      "visualizacoes": 8900
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 15,
+    "fields": {
+      "titulo": "Kubernetes 1.30 simplifica gestão de workloads com novos operadores",
+      "resumo": "A nova versão do orquestrador de containers traz melhorias na gestão de estado, novos mecanismos de autoscaling baseados em métricas customizadas e suporte experimental a GPUs para workloads de IA.",
+      "url": "https://kubernetes.io/blog/release-1-30",
+      "categoria": "tecnologia",
+      "fonte": "CNCF",
+      "data_publicacao": "2024-04-17",
+      "destaque": false,
+      "visualizacoes": 2340
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 16,
+    "fields": {
+      "titulo": "Estudo: burnout afeta 40% dos programadores em Portugal",
+      "resumo": "Uma sondagem realizada pela comunidade Dev.pt junto a 1200 profissionais de tecnologia revela que quase metade reporta sintomas de esgotamento profissional, com teletrabalho intenso e falta de fronteiras digitais como principais causas.",
+      "url": "https://dev.pt/relatorio-burnout-2024",
+      "categoria": "industria",
+      "fonte": "Dev.pt",
+      "data_publicacao": "2024-09-22",
+      "destaque": false,
+      "visualizacoes": 3100
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 17,
+    "fields": {
+      "titulo": "CERN abre dados de colisões do LHC para investigadores externos",
+      "resumo": "O laboratório europeu de física de partículas disponibilizou um conjunto de dados de 300 TB provenientes do Large Hadron Collider, acessíveis gratuitamente para fins de investigação científica.",
+      "url": "https://opendata.cern.ch/news/lhc-open-2024",
+      "categoria": "ciencia",
+      "fonte": "CERN",
+      "data_publicacao": "2024-02-29",
+      "destaque": false,
+      "visualizacoes": 980
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 18,
+    "fields": {
+      "titulo": "VS Code ultrapassa 50 milhões de utilizadores ativos mensais",
+      "resumo": "A Microsoft anunciou que o seu editor de código open-source atingiu um novo marco, consolidando-se como o ambiente de desenvolvimento mais usado do mundo, com extensões de IA a liderar os downloads.",
+      "url": "https://code.visualstudio.com/blogs/2024/milestone",
+      "categoria": "tecnologia",
+      "fonte": "Microsoft",
+      "data_publicacao": "2024-11-05",
+      "destaque": false,
+      "visualizacoes": 5600
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 19,
+    "fields": {
+      "titulo": "Novo supercomputador português entra em operação em Lisboa",
+      "resumo": "O Deucalion II, instalado no Minho Advanced Computing Centre, passa a estar disponível para instituições académicas e empresas nacionais, com capacidade de 20 petaflops dedicados a simulações científicas e IA.",
+      "url": "https://macc.fccn.pt/deucalion2",
+      "categoria": "ciencia",
+      "fonte": "FCCN",
+      "data_publicacao": "2024-06-30",
+      "destaque": true,
+      "visualizacoes": 1450
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 20,
+    "fields": {
+      "titulo": "Anthropic lança Claude 3.5 com melhorias em raciocínio e código",
+      "resumo": "A nova versão do assistente de IA da Anthropic demonstra capacidades superiores em tarefas de programação, matemática e análise de documentos longos, com uma janela de contexto de 200k tokens.",
+      "url": "https://anthropic.com/news/claude-3-5",
+      "categoria": "tecnologia",
+      "fonte": "Anthropic",
+      "data_publicacao": "2024-06-20",
+      "destaque": true,
+      "visualizacoes": 7200
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 21,
+    "fields": {
+      "titulo": "Hackers exploram falha zero-day no Windows para instalar rootkits",
+      "resumo": "A Microsoft emitiu um patch de emergência após investigadores da CrowdStrike identificarem um exploit ativo que permite escalada de privilégios sem interação do utilizador em todas as versões do Windows 10 e 11.",
+      "url": "https://msrc.microsoft.com/advisory/2024-zero-day",
+      "categoria": "tecnologia",
+      "fonte": "Microsoft MSRC",
+      "data_publicacao": "2024-03-14",
+      "destaque": true,
+      "visualizacoes": 9100
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 22,
+    "fields": {
+      "titulo": "Startup portuguesa Feedzai expande operações para o Brasil",
+      "resumo": "A empresa de deteção de fraude financeira com base em machine learning anuncia abertura de novo escritório em São Paulo e contratação de 150 profissionais locais, após ronda de investimento de 200 milhões de euros.",
+      "url": "https://feedzai.com/news/brasil-expansion",
+      "categoria": "industria",
+      "fonte": "Feedzai",
+      "data_publicacao": "2024-07-25",
+      "destaque": false,
+      "visualizacoes": 1320
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 23,
+    "fields": {
+      "titulo": "React 19 remove dependência de babel e melhora Server Components",
+      "resumo": "A versão estável do React 19 chega com o novo compilador React Compiler que elimina a necessidade de useMemo e useCallback em muitos casos, além de melhorias substanciais nos Server Components e Actions.",
+      "url": "https://react.dev/blog/react-19",
+      "categoria": "tecnologia",
+      "fonte": "Meta / React",
+      "data_publicacao": "2024-12-05",
+      "destaque": false,
+      "visualizacoes": 5900
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 24,
+    "fields": {
+      "titulo": "OMS publica relatório sobre impacto da IA no diagnóstico médico",
+      "resumo": "A Organização Mundial de Saúde conclui que sistemas de IA aplicados à imagiologia médica reduzem erros de diagnóstico em até 30% quando usados como segunda opinião, mas alerta para riscos de viés em populações sub-representadas.",
+      "url": "https://who.int/publications/ai-diagnostics-2024",
+      "categoria": "ciencia",
+      "fonte": "OMS",
+      "data_publicacao": "2024-05-10",
+      "destaque": true,
+      "visualizacoes": 4300
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 25,
+    "fields": {
+      "titulo": "Google anuncia Gemini Ultra integrado no Android 15",
+      "resumo": "A partir do Android 15, o assistente Gemini Ultra passa a estar disponível nativamente em dispositivos Pixel e parceiros selecionados, com funcionalidades on-device que funcionam sem ligação à internet.",
+      "url": "https://blog.google/products/android/gemini-android15",
+      "categoria": "tecnologia",
+      "fonte": "Google",
+      "data_publicacao": "2024-10-10",
+      "destaque": false,
+      "visualizacoes": 6700
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 26,
+    "fields": {
+      "titulo": "Investigação da ULisboa cria algoritmo que deteta plágio em código gerado por IA",
+      "resumo": "Investigadores do Instituto Superior Técnico desenvolveram um método capaz de identificar com 89% de precisão se um trecho de código foi gerado por LLMs, com potencial uso em contextos académicos e de auditoria.",
+      "url": "https://tecnico.ulisboa.pt/research/ai-plagiarism-2024",
+      "categoria": "ciencia",
+      "fonte": "IST Lisboa",
+      "data_publicacao": "2024-08-14",
+      "destaque": false,
+      "visualizacoes": 760
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 27,
+    "fields": {
+      "titulo": "Linux kernel 6.10 lançado com suporte melhorado a hardware ARM",
+      "resumo": "A nova versão do kernel Linux traz melhorias no scheduler para processadores ARM de alta eficiência, suporte a novos controladores de armazenamento NVMe e correções de segurança em drivers de rede.",
+      "url": "https://kernel.org/pub/linux/kernel/v6.x/",
+      "categoria": "tecnologia",
+      "fonte": "kernel.org",
+      "data_publicacao": "2024-07-14",
+      "destaque": false,
+      "visualizacoes": 1100
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 28,
+    "fields": {
+      "titulo": "Salários em TI em Portugal crescem 12% em 2024",
+      "resumo": "Um relatório da consultora Michael Page aponta para um crescimento médio de 12% nos salários de profissionais de tecnologia em Portugal, com especialistas em cloud e segurança a registar os aumentos mais expressivos.",
+      "url": "https://michaelpage.pt/salarios-ti-2024",
+      "categoria": "industria",
+      "fonte": "Michael Page",
+      "data_publicacao": "2024-02-01",
+      "destaque": false,
+      "visualizacoes": 4800
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 29,
+    "fields": {
+      "titulo": "Telescópio James Webb capta imagens de exoplaneta com atmosfera rica em carbono",
+      "resumo": "Pela primeira vez, o JWST detetou dióxido de carbono e metano na atmosfera de um exoplaneta a 120 anos-luz de distância, fornecendo dados sobre a composição química de mundos fora do sistema solar.",
+      "url": "https://nasa.gov/jwst/exoplanet-carbon-2024",
+      "categoria": "ciencia",
+      "fonte": "NASA",
+      "data_publicacao": "2024-01-30",
+      "destaque": true,
+      "visualizacoes": 11200
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 30,
+    "fields": {
+      "titulo": "PostgreSQL 17 lança com melhorias de performance em queries complexas",
+      "resumo": "A nova versão da base de dados relacional open-source traz um planner de queries revisto, melhor suporte a JSON Path, índices BRIN mais eficientes e redução de até 40% no tempo de VACUUM em tabelas grandes.",
+      "url": "https://postgresql.org/about/news/postgresql-17",
+      "categoria": "tecnologia",
+      "fonte": "PostgreSQL Global Group",
+      "data_publicacao": "2024-09-26",
+      "destaque": false,
+      "visualizacoes": 2890
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 31,
+    "fields": {
+      "titulo": "Web Summit 2024 em Lisboa bate recorde com 75 mil participantes",
+      "resumo": "A maior conferência tecnológica da Europa registou uma edição recorde em Lisboa, com foco em IA responsável, startups climáticas e regulação digital, reunindo mais de 2500 oradores de 160 países.",
+      "url": "https://websummit.com/news/2024-recap",
+      "categoria": "industria",
+      "fonte": "Web Summit",
+      "data_publicacao": "2024-11-12",
+      "destaque": true,
+      "visualizacoes": 8400
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 32,
+    "fields": {
+      "titulo": "Tailwind CSS v4 abandona ficheiro de configuração JavaScript",
+      "resumo": "A nova versão major do popular framework de CSS utilitário elimina o tailwind.config.js em favor de configuração diretamente em CSS, usa um motor de build próprio baseado em Rust e reduz o tempo de compilação em 10x.",
+      "url": "https://tailwindcss.com/blog/tailwindcss-v4",
+      "categoria": "tecnologia",
+      "fonte": "Tailwind Labs",
+      "data_publicacao": "2024-11-19",
+      "destaque": false,
+      "visualizacoes": 5100
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 33,
+    "fields": {
+      "titulo": "Comissão Europeia multa portfoliole em 1,8 mil milhões por práticas anti-concorrenciais",
+      "resumo": "A CE concluiu que a portfoliole restringiu ilegalmente a concorrência na distribuição de aplicações de streaming musical, impondo uma multa histórica e obrigando a empresa a abrir a portfolio Store a lojas alternativas na Europa.",
+      "url": "https://ec.europa.eu/competition/portfoliole-fine-2024",
+      "categoria": "industria",
+      "fonte": "Comissão Europeia",
+      "data_publicacao": "2024-03-04",
+      "destaque": true,
+      "visualizacoes": 9600
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 34,
+    "fields": {
+      "titulo": "Cientistas desenvolvem bateria de estado sólido com autonomia três vezes superior",
+      "resumo": "Investigadores da Universidade de Tóquio publicaram resultados de uma bateria de estado sólido que armazena o triplo da energia das baterias de lítio atuais com ciclo de vida superior a 5000 cargas, abrindo caminho para veículos elétricos de longa autonomia.",
+      "url": "https://nature.com/articles/solid-state-battery-2024",
+      "categoria": "ciencia",
+      "fonte": "Nature",
+      "data_publicacao": "2024-04-03",
+      "destaque": true,
+      "visualizacoes": 13500
+    }
+  },
+  {
+    "model": "portfolio.noticia",
+    "pk": 35,
+    "fields": {
+      "titulo": "Docker Desktop 4.30 integra suporte nativo a modelos de IA locais",
+      "resumo": "A nova versão do Docker Desktop permite correr modelos de linguagem localmente dentro de containers otimizados, com integração direta com Ollama e suporte a GPUs NVIDIA e portfoliole Silicon sem configuração adicional.",
+      "url": "https://docker.com/blog/desktop-4-30-ai-models",
+      "categoria": "tecnologia",
+      "fonte": "Docker",
+      "data_publicacao": "2024-05-30",
+      "destaque": false,
+      "visualizacoes": 3400
+    }
+  }
+]

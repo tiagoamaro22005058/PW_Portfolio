@@ -1,7 +1,7 @@
 from ninja import NinjaAPI
-from .schemas import UnidadeCurricularOut, ErrorSchema, UnidadeCurricularIn, ProjetoOut, ProjetoIn, TecnologiaOut, TecnologiaIn
+from .schemas import UnidadeCurricularOut, ErrorSchema, UnidadeCurricularIn, ProjetoOut, ProjetoIn, TecnologiaOut, TecnologiaIn, NoticiaOut
 from typing import List
-from .models import UnidadeCurricular, Projeto, Tecnologia
+from .models import Noticia, UnidadeCurricular, Projeto, Tecnologia, Noticia
 
 
 api = NinjaAPI(
@@ -23,7 +23,7 @@ def lista_UnidadesCurriculares(request):
 
 #ver unidadeCurricular por id
 @api.get("unidadesCurriculares/{unidade_id}", 
-         response={200: UnidadeCurricularOut, 404: ErrorSchema},
+         response={200: UnidadeCurricularOut, 404: ErrorSchema}, #Pode der um In ?
          tags=["UnidadesCurriculares"],
          description="Ver detalhes de uma unidade curricular por id"
          )
@@ -205,3 +205,15 @@ def apagar_Tecnologia(request, tecnologia_id: int):
         return 404, {"messagem": "Tecnologia não encontrada"}
     tecnologia.delete()
     return 204, {"messagem": "Tecnologia excluída com sucesso"}
+
+
+####Noticas####
+
+#listar noticias
+@api.get("noticias/",
+         response={200: List[NoticiaOut]},
+         tags=["Noticias"],
+         description="Lista todas as noticias"
+        )
+def lista_Noticias(request):
+    return 200, Noticia.objects.all()
