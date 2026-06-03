@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'artigos',
     'cloudinary',
     'cloudinary_storage',
+    'API',
 ]
 
 MIDDLEWARE = [

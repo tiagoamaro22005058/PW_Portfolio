@@ -1,6 +1,6 @@
 [
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 1,
     "fields": {
       "titulo": "Python 3.13 lançado com melhorias de desempenho significativas",
@@ -14,7 +14,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 2,
     "fields": {
       "titulo": "Django 5.1 introduz novos campos de formulário e melhorias no ORM",
@@ -28,7 +28,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 3,
     "fields": {
       "titulo": "Portugal sobe no ranking europeu de literacia digital",
@@ -42,7 +42,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 4,
     "fields": {
       "titulo": "OpenAI apresenta GPT-5 com capacidades multimodais avançadas",
@@ -56,7 +56,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 5,
     "fields": {
       "titulo": "Universidade Lusófona abre novos cursos de Inteligência Artificial",
@@ -70,7 +70,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 6,
     "fields": {
       "titulo": "GitHub Copilot passa a suportar modelos alternativos como Claude e Gemini",
@@ -84,7 +84,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 7,
     "fields": {
       "titulo": "Estudo revela que programadores com IA são 55% mais produtivos",
@@ -98,7 +98,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 8,
     "fields": {
       "titulo": "Rust ultrapassa Java em popularidade entre developers europeus",
@@ -112,7 +112,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 9,
     "fields": {
       "titulo": "Novo regulamento europeu de IA entra em vigor",
@@ -126,7 +126,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 10,
     "fields": {
       "titulo": "WebAssembly ganha suporte a garbage collection nos principais browsers",
@@ -140,7 +140,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 11,
     "fields": {
       "titulo": "Portugal lança programa nacional de bolsas para ciência de dados",
@@ -154,7 +154,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 12,
     "fields": {
       "titulo": "Next.js 15 chega com Server Actions estáveis e melhor caching",
@@ -168,7 +168,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 13,
     "fields": {
       "titulo": "Investigadores descobrem vulnerabilidade crítica no protocolo SSH",
@@ -182,7 +182,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 14,
     "fields": {
       "titulo": "Meta lança Llama 3 com licença open-source mais permissiva",
@@ -196,7 +196,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 15,
     "fields": {
       "titulo": "Kubernetes 1.30 simplifica gestão de workloads com novos operadores",
@@ -210,7 +210,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 16,
     "fields": {
       "titulo": "Estudo: burnout afeta 40% dos programadores em Portugal",
@@ -224,7 +224,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 17,
     "fields": {
       "titulo": "CERN abre dados de colisões do LHC para investigadores externos",
@@ -238,7 +238,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 18,
     "fields": {
       "titulo": "VS Code ultrapassa 50 milhões de utilizadores ativos mensais",
@@ -252,7 +252,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 19,
     "fields": {
       "titulo": "Novo supercomputador português entra em operação em Lisboa",
@@ -266,7 +266,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 20,
     "fields": {
       "titulo": "Anthropic lança Claude 3.5 com melhorias em raciocínio e código",
@@ -280,7 +280,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 21,
     "fields": {
       "titulo": "Hackers exploram falha zero-day no Windows para instalar rootkits",
@@ -294,7 +294,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 22,
     "fields": {
       "titulo": "Startup portuguesa Feedzai expande operações para o Brasil",
@@ -308,7 +308,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 23,
     "fields": {
       "titulo": "React 19 remove dependência de babel e melhora Server Components",
@@ -322,7 +322,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 24,
     "fields": {
       "titulo": "OMS publica relatório sobre impacto da IA no diagnóstico médico",
@@ -336,7 +336,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 25,
     "fields": {
       "titulo": "Google anuncia Gemini Ultra integrado no Android 15",
@@ -350,7 +350,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 26,
     "fields": {
       "titulo": "Investigação da ULisboa cria algoritmo que deteta plágio em código gerado por IA",
@@ -364,7 +364,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 27,
     "fields": {
       "titulo": "Linux kernel 6.10 lançado com suporte melhorado a hardware ARM",
@@ -378,7 +378,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 28,
     "fields": {
       "titulo": "Salários em TI em Portugal crescem 12% em 2024",
@@ -392,7 +392,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 29,
     "fields": {
       "titulo": "Telescópio James Webb capta imagens de exoplaneta com atmosfera rica em carbono",
@@ -406,7 +406,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 30,
     "fields": {
       "titulo": "PostgreSQL 17 lança com melhorias de performance em queries complexas",
@@ -420,7 +420,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 31,
     "fields": {
       "titulo": "Web Summit 2024 em Lisboa bate recorde com 75 mil participantes",
@@ -434,7 +434,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 32,
     "fields": {
       "titulo": "Tailwind CSS v4 abandona ficheiro de configuração JavaScript",
@@ -448,12 +448,12 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 33,
     "fields": {
-      "titulo": "Comissão Europeia multa portfoliole em 1,8 mil milhões por práticas anti-concorrenciais",
-      "resumo": "A CE concluiu que a portfoliole restringiu ilegalmente a concorrência na distribuição de aplicações de streaming musical, impondo uma multa histórica e obrigando a empresa a abrir a portfolio Store a lojas alternativas na Europa.",
-      "url": "https://ec.europa.eu/competition/portfoliole-fine-2024",
+      "titulo": "Comissão Europeia multa Apple em 1,8 mil milhões por práticas anti-concorrenciais",
+      "resumo": "A CE concluiu que a Apple restringiu ilegalmente a concorrência na distribuição de aplicações de streaming musical, impondo uma multa histórica e obrigando a empresa a abrir a App Store a lojas alternativas na Europa.",
+      "url": "https://ec.europa.eu/competition/apple-fine-2024",
       "categoria": "industria",
       "fonte": "Comissão Europeia",
       "data_publicacao": "2024-03-04",
@@ -462,7 +462,7 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 34,
     "fields": {
       "titulo": "Cientistas desenvolvem bateria de estado sólido com autonomia três vezes superior",
@@ -476,11 +476,11 @@
     }
   },
   {
-    "model": "portfolio.noticia",
+    "model": "API.noticia",
     "pk": 35,
     "fields": {
       "titulo": "Docker Desktop 4.30 integra suporte nativo a modelos de IA locais",
-      "resumo": "A nova versão do Docker Desktop permite correr modelos de linguagem localmente dentro de containers otimizados, com integração direta com Ollama e suporte a GPUs NVIDIA e portfoliole Silicon sem configuração adicional.",
+      "resumo": "A nova versão do Docker Desktop permite correr modelos de linguagem localmente dentro de containers otimizados, com integração direta com Ollama e suporte a GPUs NVIDIA e Apple Silicon sem configuração adicional.",
       "url": "https://docker.com/blog/desktop-4-30-ai-models",
       "categoria": "tecnologia",
       "fonte": "Docker",

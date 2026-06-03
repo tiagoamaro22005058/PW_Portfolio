@@ -2,7 +2,8 @@ from ninja import NinjaAPI
 from ninja.security import django_auth
 from .schemas import UnidadeCurricularOut, ErrorSchema, UnidadeCurricularIn, ProjetoOut, ProjetoIn, TecnologiaOut, TecnologiaIn, NoticiaOut
 from typing import List
-from .models import Noticia, UnidadeCurricular, Projeto, Tecnologia, Noticia
+from .models import UnidadeCurricular, Projeto, Tecnologia
+from API.models import  Noticia
 
 
 api = NinjaAPI(title="API RESTfull portfolio")
@@ -213,14 +214,3 @@ def apagar_Tecnologia(request, tecnologia_id: int):
     tecnologia.delete()
     return 204, {"messagem": "Tecnologia excluída com sucesso"}
 
-
-####Noticas####
-
-#listar noticias
-@api.get("noticias/",
-         response={200: List[NoticiaOut]},
-         tags=["Noticias"],
-         description="Lista todas as noticias"
-        )
-def lista_Noticias(request):
-    return 200, Noticia.objects.all()

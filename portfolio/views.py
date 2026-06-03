@@ -197,11 +197,5 @@ def formacao_delete_view(request, id):
 
 
 # ── API Endpoint ─────────────────────────────────────────
-@login_required
 def api_endpoint(request):
-    response = requests.get('https://joaocarmona22301968.pw.deisi.ulusofona.pt/api/tecnologias', verify=False)
-    if response.status_code == 200:
-        dados = response.json()
-    else:
-        dados = []
-    return render(request, 'portfolio/api_endpoint.html', {'dados': dados}) 
+    return render(request, 'portfolio/api_endpoint.html') 

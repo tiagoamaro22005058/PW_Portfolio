@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Licenciatura, UnidadeCurricular, Docente, Projeto, Tecnologia, TFC, Competencia, Formacao, MakingOf, Noticia
+from .models import Licenciatura, UnidadeCurricular, Docente, Projeto, Tecnologia, TFC, Competencia, Formacao, MakingOf
+from API.models import Noticia
 
 @admin.register(Licenciatura) # em vez de por admin.site.register(Licenciatura, Licenciatura Admin) <-- Visto no Claude
 class LicenciaturaAdmin(admin.ModelAdmin):
@@ -54,11 +55,3 @@ class MakingOfAdmin(admin.ModelAdmin):
     list_filter = ('entidade_relacionada',)
     search_fields = ('entidade_relacionada', 'descricao_decisao')
     
-
-@admin.register(Noticia)
-class NoticiaAdmin(admin.ModelAdmin):
-    list_display = ('titulo', 'categoria', 'data_publicacao')
-    list_filter = ('categoria',)
-    search_fields = ('titulo', 'conteudo')
-
-
