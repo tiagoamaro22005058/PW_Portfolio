@@ -196,6 +196,104 @@ def formacao_delete_view(request, id):
 
 
 
-# ── API Endpoint ─────────────────────────────────────────
+# ── API Colega ────────────────────────────────────────────
+BASE_URL_COLEGA = "https://joaocarmona22301968.pw.deisi.ulusofona.pt/api/programming-languages/"
+CHAVE_COLEGA = "COLOQUEM_A_CHAVE_AQUI"
+HEADERS_COLEGA = {"X-API-Key": CHAVE_COLEGA}
+
+
 def api_endpoint(request):
-    return render(request, 'portfolio/api_endpoint.html') 
+    try:
+        resposta = requests.get(BASE_URL_COLEGA, headers=HEADERS_COLEGA, verify=False)
+        if resposta.status_code == 200:
+            dados = resposta.json()
+            erro = None
+        else:
+            dados = []
+            erro = f"Erro {resposta.status_code} ao obter dados."
+    except requests.exceptions.RequestException as e:
+        dados = []
+        erro = f"Não foi possível ligar à API do colega: {e}"
+    return render(request, 'portfolio/api_endpoint.html', {'dados': dados, 'erro': erro})
+
+
+def api_colega_criar(request):
+    erro = None
+    if request.method == 'POST':
+        payload = {
+            'name':           request.POST.get('name'),
+            'slug':           request.POST.get('slug'),
+            'typing':         request.POST.get('typing'),
+            'compiled':       request.POST.get('compiled') == 'true',
+            'year_created':   int(request.POST.get('year_created')),
+            'creator':        request.POST.get('creator'),
+            'latest_version': request.POST.get('latest_version'),
+            'difficulty':     request.POST.get('difficulty'),
+            'open_source':    request.POST.get('open_source') == 'true',
+            'website':        request.POST.get('website', ''),
+        }
+        try:
+            resposta = requests.post(BASE_URL_COLEGA, json=payload, headers=HEADERS_COLEGA, verify=False)
+            if resposta.status_code == 201:
+                return redirect('api_endpoint')
+            erro = f"Erro {resposta.status_code}: {resposta.text}"
+        except requests.exceptions.RequestException as e:
+            erro = f"Não foi possível ligar à API do colega: {e}"
+    return render(request, 'portfolio/api_colega_form.html', {'titulo': 'Nova Linguagem', 'erro': erro})
+
+
+def api_colega_editar(request, id):
+    erro = None
+    linguagem = None
+
+    if request.method == 'POST':
+        payload = {
+            'name':           request.POST.get('name'),
+            'slug':           request.POST.get('slug'),
+            'typing':         request.POST.get('typing'),
+            'compiled':       request.POST.get('compiled') == 'true',
+            'year_created':   int(request.POST.get('year_created')),
+            'creator':        request.POST.get('creator'),
+            'latest_version': request.POST.get('latest_version'),
+            'difficulty':     request.POST.get('difficulty'),
+            'open_source':    request.POST.get('open_source') == 'true',
+            'website':        request.POST.get('website', ''),
+        }
+        try:
+            resposta = requests.put(f"{BASE_URL_COLEGA}{id}/", json=payload, headers=HEADERS_COLEGA, verify=False)
+            if resposta.status_code == 200:
+                return redirect('api_endpoint')
+            erro = f"Erro {resposta.status_code}: {resposta.text}"
+        except requests.exceptions.RequestException as e:
+            erro = f"Não foi possível ligar à API do colega: {e}"
+        # Se PUT falhou, mostra o form com os dados que o utilizador escreveu
+        linguagem = payload
+        linguagem['id'] = id
+    else:
+        try:
+            resposta = requests.get(f"{BASE_URL_COLEGA}{id}/", headers=HEADERS_COLEGA, verify=False)
+            if resposta.status_code == 200:
+                linguagem = resposta.json()
+            else:
+                erro = f"Erro {resposta.status_code} ao obter linguagem."
+        except requests.exceptions.RequestException as e:
+            erro = f"Não foi possível ligar à API do colega: {e}"
+
+    return render(request, 'portfolio/api_colega_form.html', {
+        'titulo': f'Editar: {linguagem["name"] if linguagem else id}',
+        'linguagem': linguagem,
+        'erro': erro,
+    })
+
+
+def api_colega_apagar(request, id):
+    erro = None
+    if request.method == 'POST':
+        try:
+            resposta = requests.delete(f"{BASE_URL_COLEGA}{id}/", headers=HEADERS_COLEGA, verify=False)
+            if resposta.status_code in (200, 204):
+                return redirect('api_endpoint')
+            erro = f"Erro {resposta.status_code}: {resposta.text}"
+        except requests.exceptions.RequestException as e:
+            erro = f"Não foi possível ligar à API do colega: {e}"
+    return render(request, 'portfolio/api_colega_apagar.html', {'id': id, 'erro': erro})

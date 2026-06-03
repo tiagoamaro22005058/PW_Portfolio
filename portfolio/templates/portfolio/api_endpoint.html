@@ -1,198 +1,42 @@
 {% extends 'portfolio/base.html' %}
 
 {% block content %}
-
-<style>
-    #msg-box {
-        padding: 10px 16px;
-        border-radius: 6px;
-        margin-bottom: 1rem;
-        font-size: 0.88rem;
-        display: none;
-    }
-    #msg-box.success { background:#1e4620; color:#7dff85; border:1px solid #2e7d32; }
-    #msg-box.error   { background:#4c1010; color:#ff7d7d; border:1px solid #c62828; }
-</style>
-
-<!-- Cabeçalho -->
 <div class="page-header">
-    <h2 class="page-title">Tecnologias — API do Colega</h2>
-    <button class="btn btn-primary" onclick="abrirFormNovo()">+ Nova Tecnologia</button>
+    <h2 class="page-title">Linguagens de Programação — API do Colega</h2>
+    <a href="{% url 'api_colega_criar' %}" class="btn btn-primary">+ Nova Linguagem</a>
 </div>
 
-<div id="msg-box"></div>
+{% if erro %}
+    <p style="color:#f87171; margin-bottom:1rem;">{{ erro }}</p>
+{% endif %}
 
-<!-- Formulário criar / editar -->
-<article class="form-card" id="form-section" style="display:none; margin-bottom:2rem;">
-    <h3 id="form-titulo" style="margin-top:0; color:#b8977a;">Nova Tecnologia</h3>
-    <input type="hidden" id="edit-id">
-
-    <div class="form-field">
-        <label>Nome</label>
-        <input type="text" id="f-nome" placeholder="Ex: Django">
-    </div>
-    <div class="form-field">
-        <label>Categoria</label>
-        <input type="text" id="f-categoria" placeholder="Ex: framework">
-    </div>
-    <div class="form-field">
-        <label>Descrição</label>
-        <textarea id="f-descricao" rows="3" placeholder="Breve descrição..."></textarea>
-    </div>
-    <div class="form-field">
-        <label>Website</label>
-        <input type="text" id="f-url" placeholder="https://...">
-    </div>
-
-    <div class="form-actions">
-        <button class="btn btn-primary" onclick="guardar()">Guardar</button>
-        <button class="btn btn-secondary" onclick="fecharForm()">Cancelar</button>
-    </div>
-</article>
-
-<!-- Lista de cards -->
-<section class="cards-grid" id="cards-lista">
-    <p style="color:#888; font-style:italic;">A carregar dados...</p>
-</section>
-
-<!-- Modal confirmação apagar -->
-<div id="modal-apagar" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:100; align-items:center; justify-content:center;">
-    <article style="max-width:380px; width:90%; padding:2rem; text-align:center;">
-        <h3 style="color:#e0e0e0; margin-top:0;">Tens a certeza?</h3>
-        <p style="color:#aaa;">Esta ação não pode ser desfeita.</p>
-        <div class="form-actions" style="justify-content:center;">
-            <button class="btn btn-primary" style="background:#c0392b;" onclick="confirmarApagar()">Apagar</button>
-            <button class="btn btn-secondary" onclick="fecharModal()">Cancelar</button>
+<section class="cards-grid">
+    {% for lang in dados %}
+    <article>
+        <header>
+            <h3>{{ lang.name }}</h3>
+            <p>{{ lang.typing }} &middot; {{ lang.year_created }} &middot; <strong>{{ lang.difficulty }}</strong></p>
+        </header>
+        <section>
+            <p class="desc">
+                Criada por {{ lang.creator }}<br>
+                Versão: {{ lang.latest_version }} &middot;
+                {% if lang.compiled %}Compilada{% else %}Interpretada{% endif %} &middot;
+                {% if lang.open_source %}Open Source{% else %}Proprietária{% endif %}
+            </p>
+        </section>
+        <div class="card-actions">
+            {% if lang.website %}
+            <a href="{{ lang.website }}" target="_blank" class="card-link">Website</a>
+            {% endif %}
+            <a href="{% url 'api_colega_editar' lang.id %}" class="card-link">Editar</a>
+            <a href="{% url 'api_colega_apagar' lang.id %}" class="card-link card-link--danger">Apagar</a>
         </div>
     </article>
-</div>
-
-<script>
-const BASE_URL = 'https://joaocarmona22301968.pw.deisi.ulusofona.pt/api/tecnologias/';
-let idParaApagar = null;
-
-// ── Mensagens ──────────────────────────────
-function mostrarMsg(texto, tipo) {
-    const el = document.getElementById('msg-box');
-    el.textContent = texto;
-    el.className = tipo;
-    el.style.display = 'block';
-    setTimeout(() => el.style.display = 'none', 4000);
-}
-
-// ── Carregar lista ─────────────────────────
-async function carregarLista() {
-    const lista = document.getElementById('cards-lista');
-    lista.innerHTML = '<p style="color:#888; font-style:italic;">A carregar...</p>';
-    try {
-        const res = await fetch(BASE_URL);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const dados = await res.json();
-        const items = Array.isArray(dados) ? dados : (dados.items || dados.results || []);
-        renderCards(items);
-    } catch (e) {
-        lista.innerHTML = `<p style="color:#f87171;">Erro ao carregar: ${e.message}</p>`;
-    }
-}
-
-function renderCards(items) {
-    const lista = document.getElementById('cards-lista');
-    if (!items.length) {
-        lista.innerHTML = '<p style="color:#888; font-style:italic;">Nenhuma tecnologia encontrada.</p>';
-        return;
-    }
-    lista.innerHTML = items.map(item => `
-        <article>
-            <header>
-                <h3>${item.nome || '—'}</h3>
-                <p>${item.categoria || ''} ${item.nivel_interesse ? '&middot; Interesse <strong>' + item.nivel_interesse + '/5</strong>' : ''}</p>
-            </header>
-            ${item.descricao ? `<section><p class="desc">${item.descricao}</p></section>` : ''}
-            <div class="card-actions">
-                <a class="card-link" onclick='abrirFormEditar(${JSON.stringify(item)})'>Editar</a>
-                <a class="card-link card-link--danger" onclick="abrirModal(${item.id})">Apagar</a>
-            </div>
-        </article>
-    `).join('');
-}
-
-// ── Formulário ─────────────────────────────
-function abrirFormNovo() {
-    document.getElementById('edit-id').value = '';
-    document.getElementById('f-nome').value = '';
-    document.getElementById('f-categoria').value = '';
-    document.getElementById('f-descricao').value = '';
-    document.getElementById('f-url').value = '';
-    document.getElementById('form-titulo').textContent = 'Nova Tecnologia';
-    document.getElementById('form-section').style.display = 'block';
-    document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
-}
-
-function abrirFormEditar(item) {
-    document.getElementById('edit-id').value = item.id;
-    document.getElementById('f-nome').value = item.nome || '';
-    document.getElementById('f-categoria').value = item.categoria || '';
-    document.getElementById('f-descricao').value = item.descricao || '';
-    document.getElementById('f-url').value = item.url_website || '';
-    document.getElementById('form-titulo').textContent = `Editar: ${item.nome}`;
-    document.getElementById('form-section').style.display = 'block';
-    document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
-}
-
-function fecharForm() {
-    document.getElementById('form-section').style.display = 'none';
-}
-
-async function guardar() {
-    const id = document.getElementById('edit-id').value;
-    const payload = {
-        nome: document.getElementById('f-nome').value,
-        categoria: document.getElementById('f-categoria').value,
-        descricao: document.getElementById('f-descricao').value,
-        url_website: document.getElementById('f-url').value,
-    };
-    const method = id ? 'PUT' : 'POST';
-    const url = id ? `${BASE_URL}${id}/` : BASE_URL;
-    try {
-        const res = await fetch(url, {
-            method,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        mostrarMsg(id ? 'Tecnologia atualizada!' : 'Tecnologia criada!', 'success');
-        fecharForm();
-        carregarLista();
-    } catch (e) {
-        mostrarMsg(`Erro: ${e.message}`, 'error');
-    }
-}
-
-// ── Apagar ─────────────────────────────────
-function abrirModal(id) {
-    idParaApagar = id;
-    const modal = document.getElementById('modal-apagar');
-    modal.style.display = 'flex';
-}
-
-function fecharModal() {
-    idParaApagar = null;
-    document.getElementById('modal-apagar').style.display = 'none';
-}
-
-async function confirmarApagar() {
-    fecharModal();
-    try {
-        const res = await fetch(`${BASE_URL}${idParaApagar}/`, { method: 'DELETE' });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        mostrarMsg('Tecnologia apagada.', 'success');
-        carregarLista();
-    } catch (e) {
-        mostrarMsg(`Erro ao apagar: ${e.message}`, 'error');
-    }
-}
-
-carregarLista();
-</script>
-
+    {% empty %}
+        {% if not erro %}
+        <p style="color:#888; font-style:italic;">Nenhuma linguagem encontrada.</p>
+        {% endif %}
+    {% endfor %}
+</section>
 {% endblock %}

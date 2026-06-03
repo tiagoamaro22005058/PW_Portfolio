@@ -1,0 +1,78 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h2 class="page-title">{{ titulo }}</h2>
+</div>
+
+{% if erro %}
+    <p style="color:#f87171; margin-bottom:1rem;">{{ erro }}</p>
+{% endif %}
+
+<article class="form-card">
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-field">
+            <label>Nome</label>
+            <input type="text" name="name" value="{{ linguagem.name }}" required>
+        </div>
+        <div class="form-field">
+            <label>Slug</label>
+            <input type="text" name="slug" value="{{ linguagem.slug }}" required>
+        </div>
+        <div class="form-field">
+            <label>Tipagem</label>
+            <select name="typing">
+                <option value="static"  {% if linguagem.typing == 'static'  %}selected{% endif %}>Static</option>
+                <option value="dynamic" {% if linguagem.typing == 'dynamic' %}selected{% endif %}>Dynamic</option>
+                <option value="strong"  {% if linguagem.typing == 'strong'  %}selected{% endif %}>Strong</option>
+                <option value="weak"    {% if linguagem.typing == 'weak'    %}selected{% endif %}>Weak</option>
+            </select>
+        </div>
+        <div class="form-field">
+            <label>Compilada</label>
+            <select name="compiled">
+                <option value="false" {% if not linguagem.compiled %}selected{% endif %}>Não</option>
+                <option value="true"  {% if linguagem.compiled %}selected{% endif %}>Sim</option>
+            </select>
+        </div>
+        <div class="form-field">
+            <label>Ano de Criação</label>
+            <input type="number" name="year_created" value="{{ linguagem.year_created }}" required>
+        </div>
+        <div class="form-field">
+            <label>Criador</label>
+            <input type="text" name="creator" value="{{ linguagem.creator }}" required>
+        </div>
+        <div class="form-field">
+            <label>Versão Mais Recente</label>
+            <input type="text" name="latest_version" value="{{ linguagem.latest_version }}" required>
+        </div>
+        <div class="form-field">
+            <label>Dificuldade</label>
+            <select name="difficulty">
+                <option value="beginner"     {% if linguagem.difficulty == 'beginner'     %}selected{% endif %}>Beginner</option>
+                <option value="intermediate" {% if linguagem.difficulty == 'intermediate' %}selected{% endif %}>Intermediate</option>
+                <option value="advanced"     {% if linguagem.difficulty == 'advanced'     %}selected{% endif %}>Advanced</option>
+            </select>
+        </div>
+        <div class="form-field">
+            <label>Open Source</label>
+            <select name="open_source">
+                <option value="true"  {% if linguagem.open_source %}selected{% endif %}>Sim</option>
+                <option value="false" {% if not linguagem.open_source %}selected{% endif %}>Não</option>
+            </select>
+        </div>
+        <div class="form-field">
+            <label>Website</label>
+            <input type="text" name="website" value="{{ linguagem.website }}">
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="{% url 'api_endpoint' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</article>
+{% endblock %}

@@ -33,5 +33,8 @@ urlpatterns = [
     path('sobre/', views.sobre_view, name='sobre'),
     
     path('api_endpoint/', views.api_endpoint, name='api_endpoint'),
+    path('api_endpoint/criar/', views.api_colega_criar, name='api_colega_criar'),
+    path('api_endpoint/<int:id>/editar/', views.api_colega_editar, name='api_colega_editar'),
+    path('api_endpoint/<int:id>/apagar/', views.api_colega_apagar, name='api_colega_apagar'),
 
 ]

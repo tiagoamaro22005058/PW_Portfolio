@@ -1,0 +1,23 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h2 class="page-title">Apagar Linguagem</h2>
+</div>
+
+{% if erro %}
+    <p style="color:#f87171; margin-bottom:1rem;">{{ erro }}</p>
+{% endif %}
+
+<article class="form-card" style="text-align:center;">
+    <p style="color:#e0e0e0; font-size:1rem;">Tens a certeza que queres apagar a linguagem <strong>#{{ id }}</strong>?</p>
+    <p style="color:#aaa; font-size:0.85rem;">Esta ação não pode ser desfeita.</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-actions" style="justify-content:center;">
+            <button type="submit" class="btn btn-primary" style="background:#c0392b;">Apagar</button>
+            <a href="{% url 'api_endpoint' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</article>
+{% endblock %}
