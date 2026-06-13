@@ -29,4 +29,3 @@ class NoticiaIn(Schema):
 class ErrorSchema(Schema):
     messagem: str
     
-    

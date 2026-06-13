@@ -105,9 +105,116 @@
     </div>
 </section>
 
-<!-- ── 4. Estrutura de Navegação ──────────────────────── -->
+<!-- ── 4. APIs ─────────────────────────────────────────── -->
 <section class="sobre-section">
-    <h2 class="sobre-title">5. Estrutura de Navegação</h2>
+    <h2 class="sobre-title">5. APIs</h2>
+    <div class="sobre-body">
+
+        <h3 style="margin-bottom:.5rem;">API Interna (Django Ninja)</h3>
+        <p>
+            A app <code>API</code> expõe uma API REST construída com <strong>Django Ninja</strong>, disponível em <code>/api/</code>
+            (documentação interativa automática em <code>/api/docs</code>).
+            A autenticação é feita por <strong>API Key</strong> enviada no header HTTP <code>X-API-Key</code>.
+        </p>
+        <div class="cards-grid cards-grid--3" style="margin-top:1rem;">
+            <article>
+                <div class="modelo-header"><span class="modelo-icon">📰</span></div>
+                <header><h3>Notícias</h3><p class="modelo-app">recurso: /api/noticias/</p></header>
+                <section>
+                    <h4>Endpoints</h4>
+                    <ul>
+                        <li><strong>GET</strong> /noticias/ — lista (público)</li>
+                        <li><strong>GET</strong> /noticias/&lt;id&gt; — detalhe (público)</li>
+                        <li><strong>POST</strong> /noticias/ — criar (🔐 API Key)</li>
+                        <li><strong>PUT</strong> /noticias/&lt;id&gt; — editar (🔐 API Key)</li>
+                        <li><strong>DELETE</strong> /noticias/&lt;id&gt; — apagar (🔐 API Key)</li>
+                    </ul>
+                </section>
+            </article>
+            <article>
+                <div class="modelo-header"><span class="modelo-icon">📚</span></div>
+                <header><h3>Unidades Curriculares</h3><p class="modelo-app">recurso: /api/unidadesCurriculares/</p></header>
+                <section>
+                    <h4>Endpoints</h4>
+                    <ul>
+                        <li><strong>GET</strong> — lista; filtro <code>?ano=</code> + paginação (público)</li>
+                        <li><strong>GET</strong> /&lt;id&gt; — detalhe (público)</li>
+                        <li><strong>POST</strong> — criar (🔐 API Key)</li>
+                        <li><strong>PUT</strong> /&lt;id&gt; — editar (🔐 API Key)</li>
+                        <li><strong>DELETE</strong> /&lt;id&gt; — apagar (🔐 API Key)</li>
+                    </ul>
+                </section>
+            </article>
+            <article>
+                <div class="modelo-header"><span class="modelo-icon">🗂️</span></div>
+                <header><h3>Projetos</h3><p class="modelo-app">recurso: /api/projetos/</p></header>
+                <section>
+                    <h4>Endpoints</h4>
+                    <ul>
+                        <li><strong>GET</strong> — lista; filtro <code>?ano_realizacao=</code> + paginação (público)</li>
+                        <li><strong>GET</strong> /&lt;id&gt; — detalhe (público)</li>
+                        <li><strong>POST</strong> — criar (🔐 API Key)</li>
+                        <li><strong>PUT</strong> /&lt;id&gt; — editar (🔐 API Key)</li>
+                        <li><strong>DELETE</strong> /&lt;id&gt; — apagar (🔐 API Key)</li>
+                    </ul>
+                </section>
+            </article>
+            <article>
+                <div class="modelo-header"><span class="modelo-icon">⚙️</span></div>
+                <header><h3>Tecnologias</h3><p class="modelo-app">recurso: /api/tecnologias/</p></header>
+                <section>
+                    <h4>Endpoints</h4>
+                    <ul>
+                        <li><strong>GET</strong> — lista; filtro <code>?categoria=</code> + paginação (público)</li>
+                        <li><strong>GET</strong> /&lt;id&gt; — detalhe (público)</li>
+                        <li><strong>POST</strong> — criar (🔐 API Key)</li>
+                        <li><strong>PUT</strong> /&lt;id&gt; — editar (🔐 API Key)</li>
+                        <li><strong>DELETE</strong> /&lt;id&gt; — apagar (🔐 API Key)</li>
+                    </ul>
+                </section>
+            </article>
+        </div>
+
+        <h3 style="margin-top:2rem;margin-bottom:.5rem;">API do Colega (Consumo Externo)</h3>
+        <p>
+            Em <code>/api_endpoint/</code> esta aplicação consome a API de <strong>joaocarmona22301968</strong>,
+            que expõe um recurso de <strong>Linguagens de Programação</strong> (<em>ProgrammingLanguage</em>).
+            O consumo é feito server-side com a biblioteca <code>requests</code> e autenticado via header <code>X-API-Key</code>.
+        </p>
+        <div class="cards-grid cards-grid--3" style="margin-top:1rem;">
+            <article>
+                <div class="modelo-header"><span class="modelo-icon">🌐</span></div>
+                <header><h3>ProgrammingLanguage</h3><p class="modelo-app">API externa do colega</p></header>
+                <section>
+                    <h4>Campos</h4>
+                    <ul>
+                        <li>id, name, slug</li>
+                        <li>typing, compiled, year_created</li>
+                        <li>creator, latest_version</li>
+                        <li>difficulty, open_source, website</li>
+                    </ul>
+                </section>
+            </article>
+            <article>
+                <div class="modelo-header"><span class="modelo-icon">🔄</span></div>
+                <header><h3>Operações disponíveis</h3><p class="modelo-app">views server-side em portfolio/views.py</p></header>
+                <section>
+                    <h4>URLs locais</h4>
+                    <ul>
+                        <li><strong>GET</strong> /api_endpoint/ — listar linguagens</li>
+                        <li><strong>GET/POST</strong> /api_endpoint/criar/ — criar</li>
+                        <li><strong>GET/POST</strong> /api_endpoint/&lt;id&gt;/editar/ — editar</li>
+                        <li><strong>GET/POST</strong> /api_endpoint/&lt;id&gt;/apagar/ — apagar</li>
+                    </ul>
+                </section>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ── 5. Estrutura de Navegação ──────────────────────── -->
+<section class="sobre-section">
+    <h2 class="sobre-title">6. Estrutura de Navegação</h2>
     <div class="sobre-body">
         <div class="nav-tree">
             <ul>
@@ -135,6 +242,22 @@
                                 <li>logout/</li>
                             </ul>
                         </li>
+                        <li>api/ <span class="nav-crud">API Ninja</span>
+                            <ul>
+                                <li>api/docs/ (documentação automática)</li>
+                                <li>api/noticias/</li>
+                                <li>api/unidadesCurriculares/</li>
+                                <li>api/projetos/</li>
+                                <li>api/tecnologias/</li>
+                            </ul>
+                        </li>
+                        <li>api_endpoint/ (colega - ProgrammingLanguage)
+                            <ul>
+                                <li>api_endpoint/criar/</li>
+                                <li>api_endpoint/&lt;id&gt;/editar/</li>
+                                <li>api_endpoint/&lt;id&gt;/apagar/</li>
+                            </ul>
+                        </li>
                         <li>admin/</li>
                     </ul>
                 </li>
@@ -143,9 +266,9 @@
     </div>
 </section>
 
-<!-- ── 5. Vídeo de Apresentação ───────────────────────── -->
+<!-- ── 6. Vídeo de Apresentação ───────────────────────── -->
 <section class="sobre-section">
-    <h2 class="sobre-title">6. Vídeos de Apresentação</h2>
+    <h2 class="sobre-title">7. Vídeos de Apresentação</h2>
     <div class="sobre-body">
         <p>
            Playlist de videos a explicar o funcionamento de portfolio.
@@ -156,9 +279,9 @@
     </div>
 </section>
 
-<!-- ── 5. Repositório GitHub ──────────────────────────── -->
+<!-- ── 7. Repositório GitHub ──────────────────────────── -->
 <section class="sobre-section">
-    <h2 class="sobre-title">7. Repositório GitHub</h2>
+    <h2 class="sobre-title">8. Repositório GitHub</h2>
     <div class="sobre-body">
         <p>
             O código fonte desta aplicação está disponível publicamente no GitHub.
@@ -171,9 +294,9 @@
     </div>
 </section>
 
-<!-- ── 6. Making Of ───────────────────────────────────── -->
+<!-- ── 8. Making Of ───────────────────────────────────── -->
 <section class="sobre-section">
-    <h2 class="sobre-title">8. Making Of</h2>
+    <h2 class="sobre-title">9. Making Of</h2>
     <div class="sobre-body">
         {% if registos %}
         <div class="cards-grid">

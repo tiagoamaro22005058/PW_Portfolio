@@ -3,6 +3,77 @@
 {% block content %}
 <h2 class="page-title">Making Of</h2>
 
+<!-- ── APIs ──────────────────────────────────────────────── -->
+<section class="sobre-section" style="margin-bottom:2rem;">
+    <h2 class="sobre-title">APIs — Decisões e Processo</h2>
+    <div class="sobre-body">
+        <div class="cards-grid">
+
+            <article>
+                <header>
+                    <h3>🏗️ API Interna — Django Ninja</h3>
+                    <p>app: <code>API</code> · montada em <code>/api/</code></p>
+                </header>
+                <section>
+                    <h4>Decisão</h4>
+                    <p class="desc">
+                        Foi criada a app <strong>API</strong> com dois modelos: <code>APIKey</code> (gestão de chaves de acesso)
+                        e <code>Noticia</code> (recurso principal exposto). A framework escolhida foi o <strong>Django Ninja</strong>
+                        por gerar documentação automática (Swagger UI em <code>/api/docs</code>) e integrar naturalmente com o ORM do Django.
+                    </p>
+                </section>
+                <section>
+                    <h4>Autenticação</h4>
+                    <p class="desc">
+                        Implementada a classe <code>AuthAPIKey(APIKeyHeader)</code> que valida o header <code>X-API-Key</code>
+                        contra a base de dados, verificando se a chave existe, está ativa e não expirou.
+                        Os endpoints de leitura são públicos; criar, editar e apagar requerem chave válida.
+                    </p>
+                </section>
+                <section>
+                    <h4>Recursos expostos</h4>
+                    <p class="desc">
+                        Além de <strong>Notícias</strong>, foram adicionados endpoints para <strong>UnidadesCurriculares</strong>,
+                        <strong>Projetos</strong> e <strong>Tecnologias</strong> — todos com CRUD completo, filtragem por campo
+                        (ex: <code>?ano=</code>, <code>?categoria=</code>) e paginação (<code>?page=</code> + <code>?page_size=</code>).
+                    </p>
+                </section>
+            </article>
+
+            <article>
+                <header>
+                    <h3>🌐 API do Colega — ProgrammingLanguage</h3>
+                    <p>colega: joaocarmona22301968 · acesso em <code>/api_endpoint/</code></p>
+                </header>
+                <section>
+                    <h4>Decisão</h4>
+                    <p class="desc">
+                        O consumo da API externa foi implementado server-side com a biblioteca <strong>requests</strong>,
+                        em vez de JavaScript/fetch no cliente. Desta forma, a chave da API fica protegida no servidor
+                        e a lógica de integração fica centralizada nas views Django.
+                    </p>
+                </section>
+                <section>
+                    <h4>Implementação</h4>
+                    <p class="desc">
+                        Foram criadas 4 views em <code>portfolio/views.py</code>: listar, criar, editar e apagar linguagens.
+                        Os formulários são HTML puro (sem <code>forms.py</code>), lendo os dados via <code>request.POST.get()</code>
+                        e enviando-os para a API do colega como JSON com o header <code>X-API-Key</code>.
+                    </p>
+                </section>
+                <section>
+                    <h4>Campos do recurso</h4>
+                    <p class="desc">
+                        <code>id, name, slug, typing, compiled, year_created, creator, latest_version, difficulty, open_source, website</code>
+                    </p>
+                </section>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── Registos do modelo MakingOf ───────────────────── -->
 <section class="cards-grid">
     {% for registo in registos %}
     <article>

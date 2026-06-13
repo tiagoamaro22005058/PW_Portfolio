@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import (
     Licenciatura, UnidadeCurricular, Tecnologia,
@@ -80,6 +82,9 @@ def sobre_view(request):
         {'icone': '💬', 'nome': 'Comentario',          'app': 'artigos',   'relacoes': '→ Artigo (FK) · → User (FK)',               'campos': ['texto, data']},
         # accounts
         {'icone': '🔑', 'nome': 'MagicLinkToken',      'app': 'accounts',  'relacoes': '→ User (FK)',                               'campos': ['token (UUID)', 'criado em, usado', 'expira em 15 min']},
+        # API
+        {'icone': '🗝️', 'nome': 'APIKey',              'app': 'API',       'relacoes': None,                                        'campos': ['name, key (UUID)', 'is_active, expiration_date', 'created_at; método is_valid()']},
+        {'icone': '📡', 'nome': 'Noticia',             'app': 'API',       'relacoes': None,                                        'campos': ['titulo, resumo, url', 'categoria, fonte', 'data_publicacao, destaque, visualizacoes']},
     ]
     return render(request, 'portfolio/sobre.html', {
         'tecnologias': tecnologias,
@@ -197,8 +202,8 @@ def formacao_delete_view(request, id):
 
 
 # ── API Colega ────────────────────────────────────────────
-BASE_URL_COLEGA = "https://joaocarmona22301968.pw.deisi.ulusofona.pt/api/programming-languages/"
-CHAVE_COLEGA = "COLOQUEM_A_CHAVE_AQUI"
+BASE_URL_COLEGA = "https://joaocarmona22301968.pw.deisi.ulusofona.pt/api/languages/"
+CHAVE_COLEGA = "QnVhSNwKC-1SHxK6m6RpLMPmIa9EkUF2GG5amg62K_A"
 HEADERS_COLEGA = {"X-API-Key": CHAVE_COLEGA}
 
 
